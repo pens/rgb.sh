@@ -1,0 +1,59 @@
+html {
+    background: black;
+    color: WhiteSmoke;
+    font-family: "Courier New", monospace;
+}
+body {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    font-size: 2rem;
+}
+a {
+    color: Cyan;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+h1, h2, h3 {
+    color: LawnGreen;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0;
+}
+h2 {
+    margin-top: 2rem;
+}
+h3 {
+    margin-bottom: 2rem;
+}
+li {
+    list-style-type: none;
+    margin-bottom: 1rem;
+}
+ul {
+    margin: 0;
+}
+canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+div {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, .5);
+    margin: 5rem;
+    padding: 1rem;
+}
+@media (max-width: 1000px) {
+    html {
+        font-size: 200%;
+    }
+    div {
+        margin: 1rem;
+    }
+}
