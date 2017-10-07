@@ -1,3 +1,6 @@
+/*
+    Copyright (c) 2017 Seth Pendergrass. See LICENSE.
+*/
 "use strict";
 window.onload = function() {
     /*
@@ -6,7 +9,6 @@ window.onload = function() {
         - refactor code
         - switch lines to tristrip
         - do all transforms in vertex shader
-        - github
     */
     const canvas = document.getElementById('canvas');
     canvas.width = 640 * 3;
