@@ -1,81 +1,129 @@
 /*
     Copyright (c) 2017 Seth Pendergrass. See LICENSE.
 */
-"use strict";
-window.onload = function() {
-    /*
-        TODO:
-        - low res disable subpixels
-        - refactor code
-        - switch lines to tristrip
-        - do all transforms in vertex shader
-    */
-    const canvas = document.getElementById('canvas');
-    canvas.width = 640 * 3;
-    canvas.height = 480 * 3;
 
+"use strict";
+
+window.onload = function() {
+    const canvas = document.getElementById('canvas');
     const gl = canvas.getContext('webgl');
 
-    const meshVSSrc = `
+    const fbWidth = 360;
+    const fbHeight = 240;
+    var crtEnable = true;
+    var forceCrt = false;
+    gl.viewport(0, 0, fbWidth, fbHeight);
+
+    var proj = mat4.create();
+    mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), canvas.clientWidth / canvas.clientHeight, .01, 100);
+
+    function setDims() {
+        if (canvas.clientWidth >= 700 && canvas.clientHeight >= 500) {
+            crtEnable = true;
+            canvas.width = fbWidth * 3;
+            canvas.height = fbHeight * 3;
+        }
+        else {
+            crtEnable = false;
+            canvas.width = fbWidth;
+            canvas.height = fbHeight;
+        }
+    }
+
+    setDims();
+
+    window.addEventListener('resize', function() {
+        mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), canvas.clientWidth / canvas.clientHeight, .01, 100);
+        if (!forceCrt) setDims();
+    });
+
+    document.getElementById('crt').onclick = function() {
+        forceCrt = true;
+        crtEnable = !crtEnable;
+        if (!crtEnable) {
+            canvas.width = fbWidth;
+            canvas.height = fbHeight;
+        }
+        else {
+            canvas.width = fbWidth * 3;
+            canvas.height = fbHeight * 3;
+        }
+    };
+
+    const terVS = `
         attribute vec4 aVertexPosition;
         attribute vec2 aTex;
         uniform mat4 uModelViewMatrix;
         uniform mat4 uProjectionMatrix;
-        varying lowp vec2 tex;
+        uniform ivec2 uDims;
+        varying lowp vec2 vTex;
         void main() {
-            gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
-            tex = aTex;
+            vec4 pos = aVertexPosition;
+            pos.y = pos.y / sqrt(float(uDims.x * uDims.x * 2)) - 1.; 
+            gl_Position = uProjectionMatrix * uModelViewMatrix * pos; 
+            vTex = aTex;
         }
     `;
 
-    const meshFSSrc = `
+    const terFS = `
         precision lowp float;
-        varying lowp vec2 tex;
-        uniform vec3 uColor;
+        varying lowp vec2 vTex;
         void main() {
             float thr = .01;
-            float dist = min(min(tex.x, 1.0 - tex.x), min(tex.y, 1.0 - tex.y)); 
+            float dist = min(min(vTex.x, 1.0 - vTex.x), min(vTex.y, 1.0 - vTex.y)); 
             float inten = max((thr - dist) / thr, 0.0);
-
             float alpha = 0.1;
 
-            if (tex.x < thr || tex.x > 1.0 - thr || tex.y < thr || tex.y > 1.0 - thr ||
-                (tex.y + tex.x > 1.0 - thr && tex.y + tex.x < 1.0 + thr))
+            if (vTex.x < thr || vTex.x > 1.0 - thr || vTex.y < thr || vTex.y > 1.0 - thr ||
+                (vTex.y + vTex.x > 1.0 - thr && vTex.y + vTex.x < 1.0 + thr))
                 alpha = 1.0;
 
-            gl_FragColor = vec4(uColor, alpha);
-
-            if (uColor.b == 0.0) {
-                inten = min(max(gl_FragCoord.y - 180.0, 0.0) * 2.0, 480.0) / 480.0;
-                gl_FragColor = vec4(uColor * inten, inten);
-            }
+            gl_FragColor = vec4(1, .078, .576, alpha);
         }
     `;
 
-    const crtVSSrc = `
+    const sunVS = `
         attribute vec4 aVertexPosition;
-        attribute vec2 aPos;
-        varying lowp vec2 pos;
         void main() {
             gl_Position = aVertexPosition;
-            pos = aPos;
         }
     `;
 
-    const crtFSSrc = `
+    const sunFS = `
+        precision lowp float;
+        uniform ivec4 uDims;
+        void main() {
+            const vec3 light = vec3(1, .549, 0);
+            const vec3 dark = vec3(1, 0, 0);
+
+            float x = (gl_FragCoord.x / float(uDims.x) - .5) * float(uDims.z) / float(uDims.w);
+            float y = gl_FragCoord.y / float(uDims.y) - .5;
+
+            float inten = 2. * y + .5;
+            float y2 = clamp(inten, 0., 1.);
+        
+            if (x * x + y * y <= .125 && sin(y2 * y2 * 64.) >= 0.)
+                gl_FragColor = vec4(inten * light + (1. - inten) * dark, inten);
+        }
+    `;
+
+    const crtVS = `
+        attribute vec4 aVertexPosition;
+        attribute vec2 aPos;
+        varying lowp vec2 vPos;
+        void main() {
+            gl_Position = aVertexPosition;
+            vPos = aPos;
+        }
+    `;
+
+    const crtFS = `
         precision lowp float;
         uniform sampler2D uSampler;
-        uniform ivec4 dims;
-        varying lowp vec2 pos;
+        varying lowp vec2 vPos;
         void main() {
             vec4 color = vec4(1, 1, 1, 1);
-
-            int wi = dims.x;
-            int hi = dims.y;
-            int wo = dims.z;
-            int ho = dims.w;
-
-            vec4 t = texture2D(uSampler, pos);
+            vec4 t = texture2D(uSampler, vPos);
             int x = int(gl_FragCoord.x);
             int mx = x - x / 3 * 3;
             int y = int(gl_FragCoord.y);
@@ -90,160 +138,79 @@ window.onload = function() {
 
             float a = my == 0 ? 1. : 3.;
 
-            if (wo <= 1000) {
-                color = vec4(1, 1, 1, 1);
-                a = 1.;
-            }
-
             gl_FragColor = t * color * a;
         }
     `;
 
-    /*
-    Data
-    */
+    function MakeShaderProgram(vssrc, fssrc) {
+        var vs = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vs, vssrc);
+        gl.compileShader(vs);
 
-    const indices = [
-        0, 1, 2,
-        1, 3, 2
-    ];
-    const tex = [
-        0, 0,
-        1, 0,
-        0, 1,
-        1, 1        
-    ];
-    const screenTri = [
-        -1, -1, 0,
-        3, -1, 0,
-        -1, 3, 0
-    ];
-    const indices2 = [
-        0, 1, 2
-    ];
-    const tex2 = [
-        0, 0,
-        2, 0,
-        0, 2,
-    ];
-    const tex3 = [
-        0, 0,
-        1, 0,
-        0, 1,
-        1, 0,
-        0, 1,
-        1, 0,
-        0, 1,
-        1, 0,
-        0, 1
-    ];
-    const indices3 = [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 1
-    ];
-    const pos3 = [
-        0, 0, -30,
-        -10, 0, -30,
-        -7.07, -7.07, -30,
-        0, -10, -30,
-        7.07, -7.07, -30,
-        10, 0, -30,
-        7.07, 7.07, -30,
-        0, 10, -30,
-        -7.07, 7.07, -30,
-    ];
+        var fs = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fs, fssrc);
+        gl.compileShader(fs);
 
-    const meshVS = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(meshVS, meshVSSrc);
-    gl.compileShader(meshVS);
+        var prog = gl.createProgram();
+        gl.attachShader(prog, vs);
+        gl.attachShader(prog, fs);
+        gl.linkProgram(prog);
+        
+        return prog; 
 
-    const meshFS = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(meshFS, meshFSSrc);
-    gl.compileShader(meshFS);
+    };
 
-    const meshProg = gl.createProgram();
-    gl.attachShader(meshProg, meshVS);
-    gl.attachShader(meshProg, meshFS);
-    gl.linkProgram(meshProg);
+    const terrainProg = MakeShaderProgram(terVS, terFS);
+    const sunProg = MakeShaderProgram(sunVS, sunFS);
+    const crtProg = MakeShaderProgram(crtVS, crtFS);
 
-    var uProjectionMatrix = gl.getUniformLocation(meshProg, 'uProjectionMatrix');
-    var uModelViewMatrix = gl.getUniformLocation(meshProg, 'uModelViewMatrix');
-    var vertexPosition = gl.getAttribLocation(meshProg, 'aVertexPosition');
-    var aTex = gl.getAttribLocation(meshProg, 'aTex');
-    var uColor = gl.getUniformLocation(meshProg, 'uColor');
+    var uProjectionMatrix = gl.getUniformLocation(terrainProg, 'uProjectionMatrix');
+    var uModelViewMatrix = gl.getUniformLocation(terrainProg, 'uModelViewMatrix');
+    var vertexPosition = gl.getAttribLocation(terrainProg, 'aVertexPosition');
+    var aTex = gl.getAttribLocation(terrainProg, 'aTex');
+    var uDims = gl.getUniformLocation(terrainProg, 'uDims');
 
-    const indexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-
-    const texBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, texBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex), gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(aTex);
-
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.enableVertexAttribArray(vertexPosition);
-
-    const crtVS = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(crtVS, crtVSSrc);
-    gl.compileShader(crtVS);
-
-    const crtFS = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(crtFS, crtFSSrc);
-    gl.compileShader(crtFS);
-
-    console.log(gl.getShaderInfoLog(crtFS));
-
-    const crtProg = gl.createProgram();
-    gl.attachShader(crtProg, crtVS);
-    gl.attachShader(crtProg, crtFS);
-    gl.linkProgram(crtProg);
+    var vertexPositionSun = gl.getAttribLocation(sunProg, 'aVertexPosition');
+    var uDimsSun = gl.getUniformLocation(sunProg, 'uDims');
 
     var crtVertPos = gl.getAttribLocation(crtProg, 'aVertexPosition');
     var aPos = gl.getAttribLocation(crtProg, 'aPos');
     var uSampler = gl.getUniformLocation(crtProg, 'uSampler');
-    var dims = gl.getUniformLocation(crtProg, 'dims');
 
-    const indexBuffer2 = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer2);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices2), gl.STATIC_DRAW);
+    var terPos = [ 0, -1, 0, 1, -1, 0, 0, -1, 1, 1, -1, 1 ];
+    const terBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
+    gl.enableVertexAttribArray(vertexPosition);
 
-    const screenTriBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuffer);
+    const terIdxs = [ 0, 1, 2, 1, 3, 2 ];
+    const terIdxBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(terIdxs), gl.STATIC_DRAW);
+
+    const terTex = [ 0, 0, 1, 0, 0, 1, 1, 1 ];
+    const terTexBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, terTexBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terTex), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(aTex);
+
+    const screenTri = [ -1, -1, 0, 3, -1, 0, -1, 3, 0 ];
+    const screenTriBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(screenTri), gl.STATIC_DRAW);
     gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(crtVertPos);
 
-    const posBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex2), gl.STATIC_DRAW);
+    const screenIdxs = [ 0, 1, 2 ];
+    const screenIdxBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(screenIdxs), gl.STATIC_DRAW);
+
+    const screenTex = [ 0, 0, 2, 0, 0, 2 ];
+    const screenTexBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(screenTex), gl.STATIC_DRAW);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(aPos);
-
-    const indexBuffer3 = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer3);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices3), gl.STATIC_DRAW);
-
-    const posBuffer3 = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer3);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pos3), gl.STATIC_DRAW);
-
-    const texBuf3 = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, texBuf3);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex3), gl.STATIC_DRAW);
-
-    gl.clearColor(0, 0, 0.502, 1);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-    var positions = [
-        0, -1, 0,
-        1, -1, 0,
-        0, -1, 1,
-        1, -1, 1
-    ];
-    const fbWidth = canvas.width / 3;
-    const fbHeight = canvas.width / 3;
 
     const target = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, target);
@@ -256,8 +223,11 @@ window.onload = function() {
     const framebuf = gl.createFramebuffer();
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, target, 0);
-
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    gl.clearColor(0, 0, 0.502, 1);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     const width = 10;
     const dim = 2 * width;
@@ -270,74 +240,74 @@ window.onload = function() {
     var rot = 0;
     var time = 0;
     function frame(timestamp) {
-        gl.useProgram(meshProg);
+        gl.useProgram(sunProg);
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
-        gl.viewport(0, 0, fbWidth, fbHeight);
+        if (crtEnable) {
+            gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
+        }
+            gl.viewport(0, 0, fbWidth, fbHeight);
+
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        mat4.perspective(matA, 1 / Math.tan(Math.PI / 4), canvas.clientWidth / canvas.clientHeight, .01, 100);
-        gl.uniformMatrix4fv(uProjectionMatrix, false, matA);
-        gl.uniformMatrix4fv(uModelViewMatrix, false, mat4.identity(matB));
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+        gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
+        gl.vertexAttribPointer(vertexPositionSun, 3, gl.FLOAT, false, 0, 0);
+        gl.uniform4i(uDimsSun, fbWidth, fbHeight, canvas.clientWidth, canvas.clientHeight);
+        gl.drawElements(gl.TRIANGLE_FAN, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
 
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer3);
-        gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer3);
-        gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        gl.bindBuffer(gl.ARRAY_BUFFER, texBuf3);
-        gl.vertexAttribPointer(aTex, 2, gl.FLOAT, false, 0, 0);
-        gl.uniform3f(uColor, 1, 0.549, 0);
-        mat4.fromZRotation(matA, rot);
-        gl.uniformMatrix4fv(uModelViewMatrix, false, matA);
-        gl.drawElements(gl.TRIANGLE_FAN, indices3.length, gl.UNSIGNED_SHORT, 0);
+        gl.useProgram(terrainProg);
 
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.uniformMatrix4fv(uProjectionMatrix, false, proj);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
+        gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        gl.bindBuffer(gl.ARRAY_BUFFER, texBuffer);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, terTexBuf);
         gl.vertexAttribPointer(aTex, 2, gl.FLOAT, false, 0, 0);
 
-        rot += .002;
+        gl.uniform2i(uDims, width, width);
+
+        function calcPos(i, j) {
+            i -= width;
+            j -= width;
+            var dist = Math.sqrt(i * i + j * j);
+            return dist * Math.sin(heights[(i + width) * dim + j + width] + time);
+        }
+
         time += .01;
-        if (rot > Math.PI * 2)
-            rot = 0;
+        for (var k = 0; k < 4 * width * width; ++k) {
+            var i = k % (2 * width); 
+            var j = Math.floor(k / (2 * width));
 
-        for (var i = -width; i < width; ++i) {
-            for (var j = -width; j < width; ++j) {
-                function calcPos(i, j) {
-                    var dist = Math.sqrt(i * i + j * j) / Math.sqrt(width * width * 2);
-                    return dist * Math.sin(heights[(i + width) * dim + j + width] + time) - 1;
-                }
-                positions[1] = calcPos(i, j);
-                positions[4] = calcPos(i + 1, j);
-                positions[7] = calcPos(i, j + 1);
-                positions[10] = calcPos(i + 1, j + 1);
+            terPos[1] = calcPos(i, j);
+            terPos[4] = calcPos(i + 1, j);
+            terPos[7] = calcPos(i, j + 1);
+            terPos[10] = calcPos(i + 1, j + 1);
 
-                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+            gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terPos), gl.STATIC_DRAW);
 
-                mat4.fromYRotation(matA, rot);
-                mat4.translate(matB, matA, vec3.fromValues(i, 0, j));
-                gl.uniformMatrix4fv(uModelViewMatrix, false, matB);
-                gl.uniform3f(uColor, 1, 0.078, .576);
+            mat4.fromYRotation(matA, time * .2);
+            mat4.translate(matB, matA, vec3.fromValues(i - width, 0, j - width));
+            gl.uniformMatrix4fv(uModelViewMatrix, false, matB);
 
-                gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-            }
+            gl.drawElements(gl.TRIANGLES, terIdxs.length, gl.UNSIGNED_SHORT, 0);
         } 
 
-        gl.useProgram(crtProg);
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer2);
-        gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuffer);
-        gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
-        gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
-        gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-        gl.bindTexture(gl.TEXTURE_2D, target);
-        gl.uniform1i(uSampler, 0);
-        gl.uniform4i(dims, fbWidth, fbHeight, canvas.clientWidth, canvas.clientHeight);
-        gl.viewport(0, 0, canvas.width, canvas.height);
-
-        gl.drawElements(gl.TRIANGLES, indices2.length, gl.UNSIGNED_SHORT, 0);
+        if (crtEnable) {
+            gl.useProgram(crtProg);
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+            gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
+            gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
+            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+            gl.bindTexture(gl.TEXTURE_2D, target);
+            gl.uniform1i(uSampler, 0);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
+        }
 
         window.requestAnimationFrame(frame);
     };

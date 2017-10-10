@@ -5,12 +5,12 @@ html {
     background: black;
     color: WhiteSmoke;
     font-family: "Courier New", monospace;
+    font-size: 1.5rem;
 }
 body {
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
-    font-size: 2rem;
 }
 a {
     color: Cyan;
@@ -24,6 +24,9 @@ h1, h2, h3 {
     font-weight: normal;
     text-transform: uppercase;
     margin: 0;
+}
+h1 {
+    font-size: 3rem;
 }
 h2 {
     margin-top: 2rem;
@@ -52,11 +55,25 @@ div {
     margin: 5rem;
     padding: 1rem;
 }
-@media (max-width: 1000px) {
-    html {
-        font-size: 200%;
+#crt {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+@media (max-width: 700px) {
+    html, h2, h3 {
+        font-size: 8vw;
+    }
+    h1 {
+        font-size: 12vw;
+    }
+    ul {
+        padding-left: 0;
     }
     div {
-        margin: 1rem;
+        display: block;
+        margin: .25rem;
+        padding: .25rem;
+        overflow: auto;
     }
 }
