@@ -8,6 +8,10 @@ window.onload = function() {
     const canvas = document.getElementById('canvas');
     const gl = canvas.getContext('webgl');
 
+    gl.clearColor(0, 0, 0.502, 1);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
     const fbWidth = 360;
     const fbHeight = 240;
     var crtEnable = true;
@@ -15,10 +19,10 @@ window.onload = function() {
     gl.viewport(0, 0, fbWidth, fbHeight);
 
     var proj = mat4.create();
-    mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), canvas.clientWidth / canvas.clientHeight, .01, 100);
+    mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
 
     function setDims() {
-        if (canvas.clientWidth >= 700 && canvas.clientHeight >= 500) {
+        if (window.innerWidth >= 700 && window.innerHeight >= 500) {
             crtEnable = true;
             canvas.width = fbWidth * 3;
             canvas.height = fbHeight * 3;
@@ -33,7 +37,7 @@ window.onload = function() {
     setDims();
 
     window.addEventListener('resize', function() {
-        mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), canvas.clientWidth / canvas.clientHeight, .01, 100);
+        mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
         if (!forceCrt) setDims();
     });
 
@@ -122,7 +126,7 @@ window.onload = function() {
         uniform sampler2D uSampler;
         varying lowp vec2 vPos;
         void main() {
-            vec4 color = vec4(1, 1, 1, 1);
+            vec3 color = vec3(1, 1, 1);
             vec4 t = texture2D(uSampler, vPos);
             int x = int(gl_FragCoord.x);
             int mx = x - x / 3 * 3;
@@ -130,15 +134,15 @@ window.onload = function() {
             int my = y - y / 3 * 3;
 
             if (mx == 0)
-                color = vec4(1, 0, 0, 1);
+                color = vec3(1, 0, 0);
             else if (mx == 1)
-                color = vec4(0, 1, 0, 1);
+                color = vec3(0, 1, 0);
             else
-                color = vec4(0, 0, 1, 1);
+                color = vec3(0, 0, 1);
 
-            float a = my == 0 ? 1. : 3.;
+            float scanline = my == 0 ? 1. : 3.;
 
-            gl_FragColor = t * color * a;
+            gl_FragColor = vec4(t.rgb * color * scanline, 1.);
         }
     `;
 
@@ -225,10 +229,6 @@ window.onload = function() {
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, target, 0);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    gl.clearColor(0, 0, 0.502, 1);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
     const width = 10;
     const dim = 2 * width;
     var heights = Array(dim * dim).fill(-1);
@@ -237,29 +237,35 @@ window.onload = function() {
 
     var matA = mat4.create();
     var matB = mat4.create();
-    var rot = 0;
     var time = 0;
-    function frame(timestamp) {
+    var prev = null;
+    function frame(now) {
+        /*
+        Sun
+        */
         gl.useProgram(sunProg);
 
         if (crtEnable) {
             gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
         }
-            gl.viewport(0, 0, fbWidth, fbHeight);
-
+        gl.viewport(0, 0, fbWidth, fbHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
         gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
         gl.vertexAttribPointer(vertexPositionSun, 3, gl.FLOAT, false, 0, 0);
+
         gl.uniform4i(uDimsSun, fbWidth, fbHeight, canvas.clientWidth, canvas.clientHeight);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+
         gl.drawElements(gl.TRIANGLE_FAN, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
+
+        /*
+        Terrain
+        */
 
         gl.useProgram(terrainProg);
 
-        gl.uniformMatrix4fv(uProjectionMatrix, false, proj);
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
         gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
 
@@ -267,15 +273,20 @@ window.onload = function() {
         gl.vertexAttribPointer(aTex, 2, gl.FLOAT, false, 0, 0);
 
         gl.uniform2i(uDims, width, width);
+        gl.uniformMatrix4fv(uProjectionMatrix, false, proj);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
 
         function calcPos(i, j) {
             i -= width;
             j -= width;
             var dist = Math.sqrt(i * i + j * j);
-            return dist * Math.sin(heights[(i + width) * dim + j + width] + time);
+            return dist * Math.sin(heights[(i + width) * dim + j + width] + 10 * time);
         }
 
-        time += .01;
+        if (prev != null)
+            time += .0001 * (now - prev);
+        prev = now;
         for (var k = 0; k < 4 * width * width; ++k) {
             var i = k % (2 * width); 
             var j = Math.floor(k / (2 * width));
@@ -288,24 +299,34 @@ window.onload = function() {
             gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terPos), gl.STATIC_DRAW);
 
-            mat4.fromYRotation(matA, time * .2);
+            mat4.fromYRotation(matA, time);
             mat4.translate(matB, matA, vec3.fromValues(i - width, 0, j - width));
             gl.uniformMatrix4fv(uModelViewMatrix, false, matB);
 
             gl.drawElements(gl.TRIANGLES, terIdxs.length, gl.UNSIGNED_SHORT, 0);
         } 
 
+        /*
+        CRT
+        */
+
         if (crtEnable) {
             gl.useProgram(crtProg);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+
             gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
             gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
+
             gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
             gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
             gl.bindTexture(gl.TEXTURE_2D, target);
+
             gl.uniform1i(uSampler, 0);
-            gl.viewport(0, 0, canvas.width, canvas.height);
+
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
+
             gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
         }
 
