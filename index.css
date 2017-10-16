@@ -52,15 +52,10 @@ canvas {
 div {
     display: inline-block;
     background-color: rgba(0, 0, 0, .5);
-    margin: 5rem;
+    margin: 1rem;
     padding: 1rem;
 }
-#crt {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-}
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     a, li, p {
         font-size: 6vw;
     }

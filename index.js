@@ -4,147 +4,97 @@
 
 "use strict";
 
+const terVS = `
+    attribute vec4 aPos;
+    uniform mat4 uMVPMatrix;
+    uniform float uTime;
+    varying lowp vec2 vTex;
+    void main() {
+        vec4 pos = aPos;
+        float dist = sqrt(pos.x * pos.x + pos.z * pos.z) / sqrt(9. * 9. * 2.);
+        pos.y = dist * sin(pos.y + 10. * uTime) - .5;
+
+        vTex = pos.xz;
+        gl_Position = uMVPMatrix * pos; 
+    }
+`;
+
+const terFS = `
+    precision lowp float;
+    varying lowp vec2 vTex;
+    void main() {
+        const float thr = .01;
+        float alpha = 0.1;
+        vec2 tex = fract(vTex);
+
+        if (tex.x < thr || tex.x > 1.0 - thr || tex.y < thr || tex.y > 1.0 - thr ||
+            (tex.y + tex.x > 1.0 - thr && tex.y + tex.x < 1.0 + thr))
+            alpha = 1.0;
+
+        gl_FragColor = vec4(1, .078, .576, alpha);
+    }
+`;
+
+const sunVS = `
+    attribute vec2 aPos;
+    void main() {
+        gl_Position = vec4(aPos * 2. - 1., 0., 1.);
+    }
+`;
+
+const sunFS = `
+    precision lowp float;
+    uniform ivec4 uDims;
+    void main() {
+        float x = (gl_FragCoord.x / float(uDims.x) - .5) * float(uDims.z) / float(uDims.w);
+        float y = gl_FragCoord.y / float(uDims.y) - .5;
+        float inten = (y + .3) / .6;
+    
+        if (x * x + y * y <= .09 && sin(inten * inten * 100.) >= 0.)
+            gl_FragColor = vec4(1, .549 * inten, 0, clamp(1.25 * inten - .25, 0., 1.));
+    }
+`;
+
+const crtVS = `
+    attribute vec2 aPos;
+    varying lowp vec2 vPos;
+    void main() {
+        gl_Position = vec4(aPos.x * 2. - 1., aPos.y * 2. - 1., 0., 1.);
+        vPos = aPos;
+    }
+`;
+
+const crtFS = `
+    precision lowp float;
+    uniform sampler2D uSampler;
+    varying lowp vec2 vPos;
+    void main() {
+        int x = int(gl_FragCoord.x);
+        int mx = x - x / 3 * 3;
+        int y = int(gl_FragCoord.y);
+        int my = y - y / 3 * 3;
+
+        vec4 t = texture2D(uSampler, vPos);
+        vec4 color = vec4(mx == 0, mx == 1, mx == 2, 1);
+        float scanline = my == 0 ? 1. : 3.;
+
+        gl_FragColor = t * color * scanline;
+    }
+`;
+
 window.onload = function() {
-    const canvas = document.getElementById('canvas');
-    const gl = canvas.getContext('webgl');
-
-    gl.clearColor(0, 0, 0.502, 1);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
     const fbWidth = 360;
     const fbHeight = 240;
-    var crtEnable = true;
-    var forceCrt = false;
+
+    const canvas = document.getElementById('canvas');
+    canvas.width = fbWidth * 3;
+    canvas.height = fbHeight * 3;
+
+    const gl = canvas.getContext('webgl');
+    gl.clearColor(0, 0, 0, 1);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.viewport(0, 0, fbWidth, fbHeight);
-
-    var proj = mat4.create();
-    mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
-
-    function setDims() {
-        if (window.innerWidth >= 700 && window.innerHeight >= 500) {
-            crtEnable = true;
-            canvas.width = fbWidth * 3;
-            canvas.height = fbHeight * 3;
-        }
-        else {
-            crtEnable = false;
-            canvas.width = fbWidth;
-            canvas.height = fbHeight;
-        }
-    }
-
-    setDims();
-
-    window.addEventListener('resize', function() {
-        mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
-        if (!forceCrt) setDims();
-    });
-
-    document.getElementById('crt').onclick = function() {
-        forceCrt = true;
-        crtEnable = !crtEnable;
-        if (!crtEnable) {
-            canvas.width = fbWidth;
-            canvas.height = fbHeight;
-        }
-        else {
-            canvas.width = fbWidth * 3;
-            canvas.height = fbHeight * 3;
-        }
-    };
-
-    const terVS = `
-        attribute vec4 aVertexPosition;
-        attribute vec2 aTex;
-        uniform mat4 uModelViewMatrix;
-        uniform mat4 uProjectionMatrix;
-        uniform ivec2 uDims;
-        varying lowp vec2 vTex;
-        void main() {
-            vec4 pos = aVertexPosition;
-            pos.y = pos.y / sqrt(float(uDims.x * uDims.x * 2)) - 1.; 
-            gl_Position = uProjectionMatrix * uModelViewMatrix * pos; 
-            vTex = aTex;
-        }
-    `;
-
-    const terFS = `
-        precision lowp float;
-        varying lowp vec2 vTex;
-        void main() {
-            float thr = .01;
-            float dist = min(min(vTex.x, 1.0 - vTex.x), min(vTex.y, 1.0 - vTex.y)); 
-            float inten = max((thr - dist) / thr, 0.0);
-            float alpha = 0.1;
-
-            if (vTex.x < thr || vTex.x > 1.0 - thr || vTex.y < thr || vTex.y > 1.0 - thr ||
-                (vTex.y + vTex.x > 1.0 - thr && vTex.y + vTex.x < 1.0 + thr))
-                alpha = 1.0;
-
-            gl_FragColor = vec4(1, .078, .576, alpha);
-        }
-    `;
-
-    const sunVS = `
-        attribute vec4 aVertexPosition;
-        void main() {
-            gl_Position = aVertexPosition;
-        }
-    `;
-
-    const sunFS = `
-        precision lowp float;
-        uniform ivec4 uDims;
-        void main() {
-            const vec3 light = vec3(1, .549, 0);
-            const vec3 dark = vec3(1, 0, 0);
-
-            float x = (gl_FragCoord.x / float(uDims.x) - .5) * float(uDims.z) / float(uDims.w);
-            float y = gl_FragCoord.y / float(uDims.y) - .5;
-
-            float inten = 2. * y + .5;
-            float y2 = clamp(inten, 0., 1.);
-        
-            if (x * x + y * y <= .125 && sin(y2 * y2 * 64.) >= 0.)
-                gl_FragColor = vec4(inten * light + (1. - inten) * dark, inten);
-        }
-    `;
-
-    const crtVS = `
-        attribute vec4 aVertexPosition;
-        attribute vec2 aPos;
-        varying lowp vec2 vPos;
-        void main() {
-            gl_Position = aVertexPosition;
-            vPos = aPos;
-        }
-    `;
-
-    const crtFS = `
-        precision lowp float;
-        uniform sampler2D uSampler;
-        varying lowp vec2 vPos;
-        void main() {
-            vec3 color = vec3(1, 1, 1);
-            vec4 t = texture2D(uSampler, vPos);
-            int x = int(gl_FragCoord.x);
-            int mx = x - x / 3 * 3;
-            int y = int(gl_FragCoord.y);
-            int my = y - y / 3 * 3;
-
-            if (mx == 0)
-                color = vec3(1, 0, 0);
-            else if (mx == 1)
-                color = vec3(0, 1, 0);
-            else
-                color = vec3(0, 0, 1);
-
-            float scanline = my == 0 ? 1. : 3.;
-
-            gl_FragColor = vec4(t.rgb * color * scanline, 1.);
-        }
-    `;
 
     function MakeShaderProgram(vssrc, fssrc) {
         var vs = gl.createShader(gl.VERTEX_SHADER);
@@ -161,48 +111,34 @@ window.onload = function() {
         gl.linkProgram(prog);
         
         return prog; 
-
     };
 
+    var proj = mat4.create();
+    mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
+
+    window.addEventListener('resize', function() {
+        mat4.perspective(proj, 1 / Math.tan(Math.PI / 4), window.innerWidth / window.innerHeight, .01, 100);
+    });
+
     const terrainProg = MakeShaderProgram(terVS, terFS);
+    var aPosTer = gl.getAttribLocation(terrainProg, 'aPos');
+    var uMVPMatrix = gl.getUniformLocation(terrainProg, 'uMVPMatrix');
+    var uTime = gl.getUniformLocation(terrainProg, 'uTime');
+
     const sunProg = MakeShaderProgram(sunVS, sunFS);
-    const crtProg = MakeShaderProgram(crtVS, crtFS);
-
-    var uProjectionMatrix = gl.getUniformLocation(terrainProg, 'uProjectionMatrix');
-    var uModelViewMatrix = gl.getUniformLocation(terrainProg, 'uModelViewMatrix');
-    var vertexPosition = gl.getAttribLocation(terrainProg, 'aVertexPosition');
-    var aTex = gl.getAttribLocation(terrainProg, 'aTex');
-    var uDims = gl.getUniformLocation(terrainProg, 'uDims');
-
-    var vertexPositionSun = gl.getAttribLocation(sunProg, 'aVertexPosition');
+    var aPosSun = gl.getAttribLocation(sunProg, 'aPos');
     var uDimsSun = gl.getUniformLocation(sunProg, 'uDims');
 
-    var crtVertPos = gl.getAttribLocation(crtProg, 'aVertexPosition');
-    var aPos = gl.getAttribLocation(crtProg, 'aPos');
+    const crtProg = MakeShaderProgram(crtVS, crtFS);
+    var aPosCrt = gl.getAttribLocation(crtProg, 'aPos');
     var uSampler = gl.getUniformLocation(crtProg, 'uSampler');
 
-    var terPos = [ 0, -1, 0, 1, -1, 0, 0, -1, 1, 1, -1, 1 ];
     const terBuf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
-    gl.enableVertexAttribArray(vertexPosition);
+    gl.enableVertexAttribArray(aPosTer);
 
-    const terIdxs = [ 0, 1, 2, 1, 3, 2 ];
     const terIdxBuf = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(terIdxs), gl.STATIC_DRAW);
-
-    const terTex = [ 0, 0, 1, 0, 0, 1, 1, 1 ];
-    const terTexBuf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, terTexBuf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terTex), gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(aTex);
-
-    const screenTri = [ -1, -1, 0, 3, -1, 0, -1, 3, 0 ];
-    const screenTriBuf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(screenTri), gl.STATIC_DRAW);
-    gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(crtVertPos);
 
     const screenIdxs = [ 0, 1, 2 ];
     const screenIdxBuf = gl.createBuffer();
@@ -213,8 +149,8 @@ window.onload = function() {
     const screenTexBuf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(screenTex), gl.STATIC_DRAW);
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPosCrt, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(aPosCrt);
 
     const target = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, target);
@@ -227,108 +163,69 @@ window.onload = function() {
     const framebuf = gl.createFramebuffer();
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, target, 0);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    const width = 10;
-    const dim = 2 * width;
-    var heights = Array(dim * dim).fill(-1);
-    for (var i = 0; i < heights.length; ++i)
-        heights[i] = Math.random() * Math.PI * 2;
+    const width = 9;
+    var terVerts = Array(3 * width * width);
+    for (var i = 0; i < width * width; ++i) {
+        terVerts[3 * i]     = (i % width) - Math.floor(width / 2); 
+        terVerts[3 * i + 1] = Math.random() * 2 * Math.PI; 
+        terVerts[3 * i + 2] = Math.floor(i / width) - Math.floor(width / 2);
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terVerts), gl.STATIC_DRAW);
+
+    var terIdxs = Array(2 * 3 * (width - 1) * (width - 1));
+    for (var i = 0; i < (width - 1) * (width - 1); ++i) {
+        var r = Math.floor(i / (width - 1));
+        var c = i % (width - 1);
+        terIdxs[6 * i] = c + r * width;
+        terIdxs[6 * i + 1] = terIdxs[6 * i + 3] = r * width + c + 1;
+        terIdxs[6 * i + 2] = terIdxs[6 * i + 5] = (r + 1) * width + c;
+        terIdxs[6 * i + 4] = (r + 1) * width + c + 1;
+    }
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(terIdxs), gl.STATIC_DRAW);
 
     var matA = mat4.create();
     var matB = mat4.create();
     var time = 0;
-    var prev = null;
+    var prev = 0;
     function frame(now) {
-        /*
-        Sun
-        */
-        gl.useProgram(sunProg);
+        time += .0001 * (now - prev);
+        prev = now;
+        mat4.fromYRotation(matA, time);
+        mat4.multiply(matB, proj, matA);
 
-        if (crtEnable) {
-            gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
-        }
+        gl.useProgram(sunProg);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, framebuf);
         gl.viewport(0, 0, fbWidth, fbHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
-        gl.vertexAttribPointer(vertexPositionSun, 3, gl.FLOAT, false, 0, 0);
-
+        gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
+        gl.vertexAttribPointer(aPosSun, 2, gl.FLOAT, false, 0, 0);
         gl.uniform4i(uDimsSun, fbWidth, fbHeight, canvas.clientWidth, canvas.clientHeight);
-
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
 
-        gl.drawElements(gl.TRIANGLE_FAN, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
-
-        /*
-        Terrain
-        */
+        gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
 
         gl.useProgram(terrainProg);
-
         gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
-        gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, terTexBuf);
-        gl.vertexAttribPointer(aTex, 2, gl.FLOAT, false, 0, 0);
-
-        gl.uniform2i(uDims, width, width);
-        gl.uniformMatrix4fv(uProjectionMatrix, false, proj);
-
+        gl.vertexAttribPointer(aPosTer, 3, gl.FLOAT, false, 0, 0);
+        gl.uniformMatrix4fv(uMVPMatrix, false, matB);
+        gl.uniform1f(uTime, time);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
 
-        function calcPos(i, j) {
-            i -= width;
-            j -= width;
-            var dist = Math.sqrt(i * i + j * j);
-            return dist * Math.sin(heights[(i + width) * dim + j + width] + 10 * time);
-        }
+        gl.drawElements(gl.TRIANGLES, terIdxs.length, gl.UNSIGNED_SHORT, 0);
 
-        if (prev != null)
-            time += .0001 * (now - prev);
-        prev = now;
-        for (var k = 0; k < 4 * width * width; ++k) {
-            var i = k % (2 * width); 
-            var j = Math.floor(k / (2 * width));
+        gl.useProgram(crtProg);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
+        gl.vertexAttribPointer(aPosCrt, 2, gl.FLOAT, false, 0, 0);
+        gl.bindTexture(gl.TEXTURE_2D, target);
+        gl.uniform1i(uSampler, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
 
-            terPos[1] = calcPos(i, j);
-            terPos[4] = calcPos(i + 1, j);
-            terPos[7] = calcPos(i, j + 1);
-            terPos[10] = calcPos(i + 1, j + 1);
-
-            gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(terPos), gl.STATIC_DRAW);
-
-            mat4.fromYRotation(matA, time);
-            mat4.translate(matB, matA, vec3.fromValues(i - width, 0, j - width));
-            gl.uniformMatrix4fv(uModelViewMatrix, false, matB);
-
-            gl.drawElements(gl.TRIANGLES, terIdxs.length, gl.UNSIGNED_SHORT, 0);
-        } 
-
-        /*
-        CRT
-        */
-
-        if (crtEnable) {
-            gl.useProgram(crtProg);
-            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-            gl.viewport(0, 0, canvas.width, canvas.height);
-
-            gl.bindBuffer(gl.ARRAY_BUFFER, screenTriBuf);
-            gl.vertexAttribPointer(crtVertPos, 3, gl.FLOAT, false, 0, 0);
-
-            gl.bindBuffer(gl.ARRAY_BUFFER, screenTexBuf);
-            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-
-            gl.bindTexture(gl.TEXTURE_2D, target);
-
-            gl.uniform1i(uSampler, 0);
-
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
-
-            gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
-        }
+        gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
 
         window.requestAnimationFrame(frame);
     };
