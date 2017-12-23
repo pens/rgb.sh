@@ -67,6 +67,7 @@ const crtVS = `
 const crtFS = `
     precision lowp float;
     uniform sampler2D uSampler;
+    uniform float uTime;
     varying lowp vec2 vPos;
     void main() {
         int x = int(gl_FragCoord.x);
@@ -79,6 +80,12 @@ const crtFS = `
         float scanline = my == 0 ? 1. : 3.;
 
         gl_FragColor = t * color * scanline;
+/*
+TODO finish this
+*/
+        float val = mod(gl_FragCoord.y + 8000. * uTime, 1000.);
+        if (val < 160.)
+            gl_FragColor *= (sin(3.14 * val / 200.) + 1.);
     }
 `;
 
@@ -123,7 +130,7 @@ window.onload = function() {
     const terrainProg = MakeShaderProgram(terVS, terFS);
     var aPosTer = gl.getAttribLocation(terrainProg, 'aPos');
     var uMVPMatrix = gl.getUniformLocation(terrainProg, 'uMVPMatrix');
-    var uTime = gl.getUniformLocation(terrainProg, 'uTime');
+    var uTimeTer = gl.getUniformLocation(terrainProg, 'uTime');
 
     const sunProg = MakeShaderProgram(sunVS, sunFS);
     var aPosSun = gl.getAttribLocation(sunProg, 'aPos');
@@ -132,6 +139,7 @@ window.onload = function() {
     const crtProg = MakeShaderProgram(crtVS, crtFS);
     var aPosCrt = gl.getAttribLocation(crtProg, 'aPos');
     var uSampler = gl.getUniformLocation(crtProg, 'uSampler');
+    var uTimeCrt = gl.getUniformLocation(crtProg, 'uTime');
 
     const terBuf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
@@ -211,7 +219,7 @@ window.onload = function() {
         gl.bindBuffer(gl.ARRAY_BUFFER, terBuf);
         gl.vertexAttribPointer(aPosTer, 3, gl.FLOAT, false, 0, 0);
         gl.uniformMatrix4fv(uMVPMatrix, false, matB);
-        gl.uniform1f(uTime, time);
+        gl.uniform1f(uTimeTer, time);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, terIdxBuf);
 
         gl.drawElements(gl.TRIANGLES, terIdxs.length, gl.UNSIGNED_SHORT, 0);
@@ -223,6 +231,7 @@ window.onload = function() {
         gl.vertexAttribPointer(aPosCrt, 2, gl.FLOAT, false, 0, 0);
         gl.bindTexture(gl.TEXTURE_2D, target);
         gl.uniform1i(uSampler, 0);
+        gl.uniform1f(uTimeCrt, time);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, screenIdxBuf);
 
         gl.drawElements(gl.TRIANGLES, screenIdxs.length, gl.UNSIGNED_SHORT, 0);
