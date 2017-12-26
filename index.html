@@ -1,37 +1,31 @@
-<!--
-    Copyright (c) 2017 Seth Pendergrass. See LICENSE.
--->
-<html>
-    <head>
-        <title>rgb.sh</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="gl-matrix-min.js"></script>
-        <script src="script.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <canvas id="canvas"></canvas>
-        <div id="body">
-            <div class="sect">
-                <h1>seth pendergrass</h1>
-                <h3>graphics & gpu engineer</h3>
-            </div>
+---
+---
+<canvas id="canvas"></canvas>
 
-            <div class="sect">
-                <a href="https://github.com/sethdp">github</a>
-                <a href="https://linkedin.com/in/sethdp">linkedin</a>
-            </div>
+<div class="sect">
+  <h1>Seth Pendergrass</h1>
+  <h3>Graphics & GPU Engineer</h3>
+</div>
+<div class="sect">
+  <a href="//github.com/sethdp">GitHub</a>
+  <a href="//linkedin.com/in/sethdp">LinkedIn</a>
+</div>
 
-            <div class="sect">
-                <h2>projects</h2>
-                <ul>
-                    <li>titan fightin <br> <a href="https://youtu.be/4vmfLjW-_D0">youtube</a></li>
-                    <li>tree dance <br> <a href="https://youtu.be/XXFPnMiZDZg">youtube</a> <a href="https://github.com/sethdp/Tree-Dance">github</a></li>
-                    <li>kinect laser harp <br> <a href="https://youtu.be/cuG4zneXyhA">youtube</a> <a href="https://github.com/sethdp/Kinect-Laser-Harp">github</a></li>
-                    <li>eigenfish <br> <a href="https://github.com/sethdp/eigenfish">github</a></li>
-                    <li>libssvd <br> <a href="https://github.com/sethdp/libssvd">github</a> <a href="https://arxiv.org/abs/1612.07875">arxiv</a> </li>
-                </ul>
-            </div>
-        </div>
-    </body>
-</html>
+<div class="sect">
+  <h2>Projects</h2>
+  <ul>
+  {% for project in site.data.projects %}
+    <li>{{ project.name }}<br>
+      {% if project.arxiv %}
+        <a href="//arxiv.org/abs/{{ project.arxiv }}">arXiv</a>
+      {% endif %}
+      {% if project.github %}
+        <a href="//github.com/sethdp/{{ project.github }}.git">GitHub</a>
+      {% endif %}
+      {% if project.youtube %}
+        <a href="//youtu.be/{{ project.youtube }}">YouTube</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</div>

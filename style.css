@@ -10,6 +10,7 @@ html {
 * {
     font-size: 1rem;
     font-weight: normal;
+    text-transform: lowercase;
 }
 body {
     margin: 0 auto;
@@ -31,6 +32,9 @@ h1, h2 {
 h3 {
     color: DeepPink;
     margin: 0;
+}
+h1 a, h2 a, h3 a {
+    color: inherit;
 }
 li {
     list-style-type: none;
