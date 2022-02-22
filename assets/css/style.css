@@ -26,7 +26,7 @@ h2 {
     line-height: 1;
     margin: 0;
 }
-h3 {
+h3, h4 {
     font-family: 'Monaco', monospace;
     font-size: 1rem;
     font-weight: normal;
@@ -229,10 +229,22 @@ article h1 {
     line-height: 1;
 }
 article h2 {
-    margin: 2rem 0 0;
+    margin: 3rem 0 0;
 }
 article h3 {
     color: #fafcff;
+    font-family: 'Futura', sans-serif;
+    margin-top: 3rem;
+}
+article h4 {
+    color: #fafcff;
+    font-family: 'Futura', sans-serif;
+    font-size: .8rem;
+    margin-top: 3rem;
+    text-transform: uppercase;
+}
+article h1 + h2, article h2 + h3, article h3 + h4 {
+    margin-top: .5rem;
 }
 article p {
     line-height: 1.4;
