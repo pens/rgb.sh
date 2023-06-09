@@ -18,12 +18,29 @@ defaults:
 # Keep _site clean
 exclude: ["README.md", "LICENSE", "Gemfile*", "CNAME", "serve.sh"]
 
-# Atom Feed & SEO
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-title: rgb.sh
-description: Seth Pendergrass's Blog
-author: Seth Pendergrass
+  - jekyll-feed          # Atom (RSS) Feed
+  - jekyll-redirect-from # Redirecting old paths
+  - jekyll-seo-tag       # Metadata tags
+
+# Atom (RSS) Feed
+# https://github.com/jekyll/jekyll-feed
+# Uses title, description and author below
+# Defaults to /feed.xml
 feed:
   excerpt_only: true
+
+# Redirects
+# https://github.com/jekyll/jekyll-redirect-from
+# Don't need redirects.json in output
+redirect_from:
+  json: false
+
+# SEO Tags
+# https://github.com/jekyll/jekyll-seo-tag
+# Note: Will be overwritten by post front matter.
+title: rgb.sh
+tagline: Seth Pendergrass
+description: Seth Pendergrass's personal website.
+author: Seth Pendergrass
+logo: /favicon.ico
