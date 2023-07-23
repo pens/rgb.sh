@@ -1,15 +1,22 @@
 ---
 title: Blog
 ---
-<a href="/feed.xml">RSS</a>
-{% for post in site.posts %}
-<!-- TODO is there a semantic tag for this? -->
-<a class="post" href="{{post.url}}">
-    <h2>{{ post.title }}</h2>
-    <h3>{{ post.date | date: '%B %e %Y' }}</h3>
-    <p>{{ post.excerpt }}</p>
-</a>
-{% endfor %}
-<img class="t t1" src="/assets/home/tri1.png">
-<img class="t t2" src="/assets/home/tri2.png">
-<img class="t t3" src="/assets/home/tri3.png">
+<article>
+    <header>
+        <h1>{{ page.title }}</h1>
+    </header>
+    {%- for post in site.posts -%}
+    <section>
+        <a class="post" href="{{ post.url }}">
+        <hgroup>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.date | date: '%B %e %Y' }}</p>
+        </hgroup>
+        <p>{{ post.excerpt }}</p>
+        </a>
+    </section>
+    {%- endfor -%}
+</article>
+<img class="t t1" src="/assets/tri1.png" alt="">
+<img class="t t2" src="/assets/tri2.png" alt="">
+<img class="t t3" src="/assets/tri3.png" alt="">

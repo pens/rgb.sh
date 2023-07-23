@@ -1,0 +1,20 @@
+- company: Applied Intuition
+  team: Spectral
+  date: 2022 - 2023
+  desc: "I upgraded the Spectral sensor simulator engine to support new rendering techniques."
+- company: Facebook
+  team: Oculus Link
+  date: 2019 - 2021
+  desc: "I improved the visual quality of Oculus Link, and developed the initial bitrate adaptation algorithm for Air Link."
+- company: Microsoft
+  team: Xbox Backward Compatibility GPU
+  date: Summer 2017, 2018 - 2019
+  desc: "I made a number of fixes to ship 360 and OG Xbox titles, as well as added 4K support to a subset."
+- company: Microsoft
+  team: Remote Desktop Graphics
+  date: Summer 2016
+  desc: "I implemented RemoteFX decoding for web browser."
+- company: University of Washington
+  team: Brunton Lab, MechE
+  date: 2015 - 2017
+  desc: "I implemented GPU-accelerated streaming singular value decomposition and dynamic mode decomposition."

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- Copyright (c) 2017-{{ site.time | date: "%Y"}} Seth Pendergrass. See LICENSE. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {%- for style in page.styles -%}
+    <link rel="stylesheet" href="/assets/css/{{ style }}">
+    {%- endfor -%}
+    {%- for script in page.scripts -%}
+    <script type="module" src="/assets/js/{{ script }}"></script>
+    {%- endfor -%}
+    {%- if page.math -%}
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    {%- endif -%}
+    {%- if page.redirect.to -%}
+    <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
+    {%- endif -%}
+    {%- feed_meta -%}
+    {%- seo -%}
+</head>
+<body>
+    {{ content }}
+</body>
+</html>

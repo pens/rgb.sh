@@ -1,0 +1,6 @@
+- Clean up CSS
+  - Make generalize rules across pages
+  - Projects width hack
+- Make rgb.sh/home link absolute (only on desktop)
+- Add background to projects page
+- Fix footer not at bottom on about

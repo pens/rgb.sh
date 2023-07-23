@@ -5,8 +5,7 @@ theme: null
 # Configure Layouts
 defaults:
   - scope:
-      path: "*.html"
-      type: "pages"
+      path: ""
     values:
       layout: "page"
   - scope:
@@ -22,6 +21,7 @@ plugins:
   - jekyll-feed          # Atom (RSS) Feed
   - jekyll-redirect-from # Redirecting old paths
   - jekyll-seo-tag       # Metadata tags
+  - jekyll-sitemap       # Generate sitemap.xml
 
 # Atom (RSS) Feed
 # https://github.com/jekyll/jekyll-feed
