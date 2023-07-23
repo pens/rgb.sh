@@ -1,0 +1,141 @@
+display_tags:
+  - graphics
+  - gamedev
+  - research
+  - software
+  - electronics
+  - art
+  - wood
+projects:
+  - name: "Streaming SVD & DMD"
+    subtitle: "Research Project"
+    description: "Streaming versions of the Singular Value Decomposition and Dynamic Mode Decomposition, allowing for real-time background subtraction (among other uses)."
+    year: 2017
+    tags:
+      - college
+      - research
+      - software
+    links:
+      image: dmd.png
+      arxiv: 1612.07875
+      blog: dmd
+      github: libssvd
+  - name: Titan Fightin
+    subtitle: "VR Capstone"
+    description: "VR capstone team project. Demonstrates asymmetric multiplayer in Virtual Reality."
+    year: 2016
+    tags:
+      - college
+      - gamedev
+      - software
+    links:
+      image: titan.jpg
+      github: titan_fightin
+      youtube: 4vmfLjW-_D0
+  - name: Eigenfish
+    subtitle: "Fish Detector"
+    description: "ML-based Python package for detecting fish in low-quality underwater video."
+    year: 2016
+    tags:
+      - college
+      - research
+      - software
+    links:
+      image: fish.jpg
+      github: eigenfish
+  - name: Tree Dance
+    subtitle: "Real-Time Renderer"
+    description: "Direct3D renderer showcasing modern rendering techniques and custom asset importers."
+    year: 2014
+    tags:
+      - college
+      - graphics
+      - software
+    links:
+      image: tree.jpg
+      github: tree_dance
+      youtube: XXFPnMiZDZg
+  - name: Kinect Laser Harp
+    subtitle: "Musical Instrument"
+    description: "Augmented Reality laser harp using the Kinect, built at DubHacks."
+    year: 2014
+    tags:
+      - college
+      - graphics
+      - software
+    links:
+      image: harp.jpg
+      github: kinect_laser_harp
+      youtube: cuG4zneXyhA
+#  - name: "Birthday Puzzle"
+#    subtitle: "Escape Room"
+#    year: 2023
+#    tags:
+#      - software
+#    links:
+#      image: cmdle.png
+#      github: cmdle
+#  - name: "Color of Cities"
+#    subtitle: "Art from StreetView"
+#    description: "Making art from OpenStreetMap and Google Street View to represent the colors of cities."
+#    year: 2022
+#    tags:
+#      - art
+#      - software
+#    links:
+#      image: dmd.png
+#      blog: cities
+#  - name: "Boos Bass"
+#    subtitle: "Electric Cutting Board"
+#    year: 2023
+#    tags:
+#      - wood
+#    links:
+#      image: dmd.png
+#  - name: "Nightstands"
+#    subtitle: "Reclaimed Wood"
+#    year: 2023
+#    tags:
+#      - wood
+#    links:
+#      image: dmd.png
+#  - name: "Headboard"
+#    subtitle: "Reclaimed Wood"
+#    year: 2023
+#    tags:
+#      - wood
+#    links:
+#      image: dmd.png
+#  - name: "Garage Shelves"
+#    subtitle: "Too Much Storage"
+#    year: 2022
+#    tags:
+#      - wood
+#    links:
+#      image: dmd.png
+#  - name: "Suitcase PC"
+#    subtitle: "DIY Laptop"
+#    year: 20XX
+#    tags:
+#      - electronics
+#      - hs
+#    links:
+#      image: dmd.png
+#  - name: "Eigenapes"
+#    subtitle: "NFT"
+#    year: 2022
+#    tags:
+#      - software
+#    links:
+#      image: eigenapes.png
+#      blog: "eigenapes"
+#      github: eigenapes
+#  - name: "Transforms"
+#    subtitle: "Guide to 3D Transformations"
+#    year:
+#    tags:
+#      - graphics
+#      - software
+#    links:
+#      image: dmd.png
+#      blog: transforms

@@ -20,7 +20,7 @@ varying vec2 vTex;
 void main() {
     vTex = aTex;
     gl_Position = uTrans * vec4(aPos, 1);
-} 
+}
 `;
 
 const fsSrc = `
@@ -35,6 +35,12 @@ void main() {
 
 function matI() {
     return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+}
+
+function matScale(mat, scale) {
+    mat[0] = scale;
+    mat[5] = scale;
+    mat[10] = scale;
 }
 
 function matRot(mat, yaw, pitch, roll) {
@@ -99,7 +105,7 @@ canvas.width = canvas.clientWidth;
 let gl = canvas.getContext('webgl');
 gl.enable(gl.CULL_FACE);
 gl.enable(gl.DEPTH_TEST);
-gl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight); 
+gl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
 
 let vs = gl.createShader(gl.VERTEX_SHADER);
 gl.shaderSource(vs, vsSrc)
@@ -152,18 +158,21 @@ img.onload = function() {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
     gl.generateMipmap(gl.TEXTURE_2D);
 }
-img.src = '/assets/home/8bitme.png';
+img.src = '/assets/8bitme.png';
 
 let uTrans = gl.getUniformLocation(p, 'uTrans');
 
+let s = matI();
 let r = matI();
 let t = matI();
+let model_rt = matI();
 let model = matI();
 let view = matI();
 let proj = matI();
 let modelView = matI();
 let transform = matI();
 
+matScale(s, 1.3);
 matTrans(t, -.5, -.5, -.5);
 matTrans(view, 0, 0, -2);
 matPersp(proj, Math.PI / 2, 16 / 9, .1, 10);
@@ -174,7 +183,9 @@ function draw(timestamp) {
     let roll = timestamp / 4000;
     matRot(r, yaw, pitch, roll);
 
-    matMul(model, r, t);
+    // Translate first: [0, 1] -> [-.5, .5]
+    matMul(model_rt, s, t);
+    matMul(model, r, model_rt);
     matMul(modelView, view, model);
     matMul(transform, proj, modelView);
 

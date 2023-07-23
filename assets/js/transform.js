@@ -1,5 +1,7 @@
 ---
+layout: none
 ---
+// Front matter allows Jekyll to insert shaders
 import * as THREE from '/assets/js/three/build/three.module.js';
 import { OrbitControls } from '/assets/js/three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from '/assets/js/three/examples/jsm/libs/dat.gui.module.js';

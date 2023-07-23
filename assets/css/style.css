@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017-20 Seth Pendergrass. See LICENSE.
+    Copyright (c) 2017-23 Seth Pendergrass. See LICENSE.
 */
 /* General */
 html {
@@ -10,6 +10,25 @@ html {
 }
 body {
     margin: 1rem;
+}
+
+a, a:visited {
+    color: unset;
+    word-break: break-word;
+}
+a:hover {
+    background-color: #fafcff;
+    color: #000;
+}
+address {
+    font-style: normal;
+}
+article {
+    margin: 0 auto;
+    max-width: 640px;
+}
+footer {
+    margin-top: 2rem;
 }
 h1 {
     font-family: 'Futura', sans-serif;
@@ -33,24 +52,27 @@ h3, h4 {
     margin: 0;
     color: #d3d8e0;
 }
-a, a:visited {
-    color: unset;
-    word-break: break-word;
+header {
+    margin-bottom: 2rem;
 }
-a:hover {
-    background-color: #fafcff;
-    color: #000;
+.header {
+    display: flex;
+    justify-content: space-between;
 }
 p {
     font-size: 100%;
     line-height: initial;
     margin: 0;
 }
-header {
-    margin-bottom: 2rem;
+
+.r {
+    color: red;
 }
-footer {
-    margin-top: 2rem;
+.g {
+    color: lime;
+}
+.b {
+    color: blue;
 }
 
 /* Index */
@@ -58,12 +80,12 @@ h1.idx {
     font-size: 8rem;
     position: fixed;
     right: 1rem;
-    bottom: 0rem;
+    bottom: 1rem;
     margin: 0;
 }
-h2.idx {
+hgroup.idx > * {
     background-color: rgba(0, 0, 0, .8);
-    display: inline;
+    width: fit-content;
 }
 nav.idx {
     font-family: 'Monaco', monospace;
@@ -88,14 +110,12 @@ canvas#gl {
 }
 
 /* About Me */
-div.about > * {
+.about > p, .about > address {
     background-color: rgba(0, 0, 0, .8);
     width: fit-content;
-    max-width: 800px;
     margin: 0 0 1rem;
-    font-style: normal;
 }
-img.me {
+.me {
     float: right;
     image-rendering: pixelated;
     width: 40%;
@@ -104,7 +124,7 @@ img.me {
     box-shadow: -10px 0 0 -5px red, 5px 8px 0 -5px blue, 5px -8px 0 -5px lime;
     margin: 3px 0 3px 5px;
 }
-img.grid {
+.grid {
     position: fixed;
     top: 20%;
     left: 10%;
@@ -115,29 +135,13 @@ img.grid {
     z-index: -1;
 }
 
-/* Experience */
-div.job {
-    margin: 2rem 0;
-}
-div.job * {
-    background-color: rgba(0, 0, 0, .8);
-    width: fit-content;
-}
-img.mask {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    width: 60%;
-    z-index: -1;
-}
-
 /* Blog */
 a.post {
     display: block;
     margin: 2rem 0;
     text-decoration: none;
 }
-a.post * {
+a.post > p, a.post > hgroup > * {
     background-color: rgba(0, 0, 0, .8);
     width: fit-content;
 }
@@ -145,63 +149,71 @@ a.post:hover * {
     background-color: #fafcff;
     color: #000;
 }
-img.t {
+.t {
     width: 250px;
     position: fixed;
     z-index: -1;
 }
-img.t1 {
+.t1 {
     right: 5%;
     top: 5%;
 }
-img.t2 {
+.t2 {
     left: 30%;
     top: 40%;
 }
-img.t3 {
+.t3 {
     right: 20%;
     bottom: 5%;
 }
 
-/* College Projects */
-div.proj {
+/* Career */
+.job {
     margin: 2rem 0;
+}
+.job h2, .job p {
+    background-color: rgba(0, 0, 0, .8);
     width: fit-content;
 }
-div.proj:nth-of-type(2n) {
+.mask {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    z-index: -1;
+}
+
+/* Projects */
+/* HACK: too lazy to make article tag wider for this page, so didn't use it */
+.project_h1 {
     margin-left: auto;
-}
-div.proj:nth-of-type(2n+1) {
     margin-right: auto;
+    max-width: 640px;
 }
-div.proj a:hover {
-    background-color: #fafcff;
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
 }
-div.proj p {
+.project {
+    flex-basis: 400px;
+}
+.project img {
+    aspect-ratio: 16 / 9;
+    display: block; /* remove spacing from linebreak after */
+    object-fit: cover;
+    width: 100%;
+}
+.project > hgroup > *, .project > p {
     background-color: rgba(0, 0, 0, .8);
-    max-width: 600px;
-}
-div.prev {
-    position: relative;
-}
-div.prev header {
-    position: absolute;
-}
-div.prev header * {
-    display: block;
     width: fit-content;
-    background-color: rgba(0, 0, 0, .8);
-}
-div.prev img {
-    display: block;
-    max-width: 100%;
-    width: 600px;
 }
 
 /* Responsiveness */
 @media screen and (max-width: 600px) {
     body {
-        margin: .25rem;
+        margin: 0rem;
     }
     h1 {
         font-size: 2.5rem;
@@ -209,9 +221,10 @@ div.prev img {
     h2 {
         font-size: 1.2rem;
     }
+
     /* Index */
     h1.idx {
-        font-size: 6rem;
+        font-size: 5rem;
     }
     canvas#gl {
         width: 320px;
@@ -220,53 +233,46 @@ div.prev img {
 }
 
 /* Blog Posts */
-article {
-    margin: 0 auto;
-    max-width: 640px;
-}
-article h1 {
+article.post h1 {
     margin: 6rem 0 2rem;
     line-height: 1;
 }
-article h2 {
+article.post h2 {
     margin: 3rem 0 0;
 }
-article h3 {
+article.post h3 {
     color: #fafcff;
     font-family: 'Futura', sans-serif;
     margin-top: 3rem;
 }
-article h4 {
+article.post h4 {
     color: #fafcff;
     font-family: 'Futura', sans-serif;
     font-size: .8rem;
     margin-top: 3rem;
     text-transform: uppercase;
 }
-article h1 + h2, article h2 + h3, article h3 + h4 {
+article.post h1 + h2, article.post h2 + h3, article.post h3 + h4 {
     margin-top: .5rem;
 }
-article p {
+article.post p {
     line-height: 1.4;
     margin: 1rem 0;
 }
-article p.excerpt {
-    margin-bottom: 4rem;
-}
-article pre {
+article.post pre {
     overflow-x: scroll;
     padding: 1rem;
 }
-article code {
+article.post code {
     font-size: 80%;
 }
-article img, article video {
+article.post img, article.post video {
     display: block;
     margin: 2rem auto .5rem;
     max-width: 640px;
     width: 100%;
 }
-article img + em {
+article.post img + em {
     display: block;
     font-size: .8em;
     margin: .5rem auto 2rem;
