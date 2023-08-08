@@ -2,6 +2,7 @@
 title: "Eigenapes"
 excerpt: Making NFTs from the principal components of some monkeys.
 math: true
+tag: project
 ---
 
 ![All Eigenfaces](/assets/blog/eigenapes/all_eigenfaces.jpg)

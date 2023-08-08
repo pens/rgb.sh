@@ -1,12 +1,36 @@
-display_tags:
-  - graphics
-  - gamedev
-  - research
-  - software
-  - electronics
-  - art
-  - wood
-projects:
+- name: "Software"
+  projects:
+  - name: "Mini Escape Room"
+    subtitle: "Birthday Gift Puzzle"
+    description: "A puzzle I put together to hide a birthday present."
+    year: 2023
+    tags:
+      - software
+    links:
+      image: cmdle.png
+      blog: cmdle
+      github: cmdle
+  - name: "Color of Cities"
+    subtitle: "Art from StreetView"
+    description: "Making art from OpenStreetMap and Google Street View to represent the colors of cities."
+    year: 2022
+    tags:
+      - art
+      - software
+    links:
+      image: cities.png
+      blog: cities
+      github: colorofcities
+  - name: "Eigenapes"
+    subtitle: "Stolen NFTs"
+    description: "I never should have done such a horrible thing."
+    year: 2022
+    tags:
+      - software
+    links:
+      image: eigenapes.png
+      blog: "eigenapes"
+      github: eigenapes
   - name: "Streaming SVD & DMD"
     subtitle: "Research Project"
     description: "Streaming versions of the Singular Value Decomposition and Dynamic Mode Decomposition, allowing for real-time background subtraction (among other uses)."
@@ -18,7 +42,7 @@ projects:
     links:
       image: dmd.png
       arxiv: 1612.07875
-      blog: dmd
+      #blog: dmd
       github: libssvd
   - name: Titan Fightin
     subtitle: "VR Capstone"
@@ -67,75 +91,33 @@ projects:
       image: harp.jpg
       github: kinect_laser_harp
       youtube: cuG4zneXyhA
-#  - name: "Birthday Puzzle"
-#    subtitle: "Escape Room"
-#    year: 2023
-#    tags:
-#      - software
-#    links:
-#      image: cmdle.png
-#      github: cmdle
-#  - name: "Color of Cities"
-#    subtitle: "Art from StreetView"
-#    description: "Making art from OpenStreetMap and Google Street View to represent the colors of cities."
-#    year: 2022
-#    tags:
-#      - art
-#      - software
-#    links:
-#      image: dmd.png
-#      blog: cities
-#  - name: "Boos Bass"
-#    subtitle: "Electric Cutting Board"
-#    year: 2023
-#    tags:
-#      - wood
-#    links:
-#      image: dmd.png
-#  - name: "Nightstands"
-#    subtitle: "Reclaimed Wood"
-#    year: 2023
-#    tags:
-#      - wood
-#    links:
-#      image: dmd.png
-#  - name: "Headboard"
-#    subtitle: "Reclaimed Wood"
-#    year: 2023
-#    tags:
-#      - wood
-#    links:
-#      image: dmd.png
-#  - name: "Garage Shelves"
-#    subtitle: "Too Much Storage"
-#    year: 2022
-#    tags:
-#      - wood
-#    links:
-#      image: dmd.png
-#  - name: "Suitcase PC"
-#    subtitle: "DIY Laptop"
-#    year: 20XX
-#    tags:
-#      - electronics
-#      - hs
-#    links:
-#      image: dmd.png
-#  - name: "Eigenapes"
-#    subtitle: "NFT"
-#    year: 2022
-#    tags:
-#      - software
-#    links:
-#      image: eigenapes.png
-#      blog: "eigenapes"
-#      github: eigenapes
-#  - name: "Transforms"
-#    subtitle: "Guide to 3D Transformations"
-#    year:
-#    tags:
-#      - graphics
-#      - software
-#    links:
-#      image: dmd.png
-#      blog: transforms
+
+- name: "Wood"
+  projects:
+  - name: "Boos Bass"
+    subtitle: "Electric Cutting Board"
+    description: "It actually works."
+    year: 2023
+    tags:
+      - wood
+    links:
+      image: boos-bass.jpg
+      blog: boos-bass
+  - name: "Nightstands"
+    subtitle: "Reclaimed Wood"
+    description: "An old futon became my new nightstands."
+    year: 2023
+    tags:
+      - wood
+    links:
+      image: nightstands.jpg
+      blog: nightstands
+  - name: "Headboard"
+    subtitle: "'Reclaimed' Wood"
+    description: "Technically, these boards did sit out on my patio for a year."
+    year: 2023
+    tags:
+      - wood
+    links:
+      image: headboard.jpg
+      blog: headboard
