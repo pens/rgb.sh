@@ -4,31 +4,36 @@ redirect_from:
 - /college
 ---
 <main>
-    <h1 class="project_h1">{{ page.title }}</h1>
+    <h1>{{ page.title }}</h1>
+    {%- for category in site.data.projects -%}
     <section class="projects">
-        {%- for project in site.data.projects.projects -%}
-        <div class="project">
-            <hgroup>
-                <h2>{{ project.name }}</h2>
-                <p>{{ project.subtitle }}, {{ project.year }}</p>
-            </hgroup>
-            <img src="assets/projects/{{ project.links.image }}" alt="Image of {{ project.name }}"/>
-            <p>{{ project.description }}</p>
-            <p>
-            {%- if project.links.arxiv %}
-            <a href="https://arxiv.org/abs/{{ project.links.arxiv }}">ArXiv</a>
-            {%- endif -%}
-            {%- if project.links.blog %}
-            <a href="blog/{{ project.links.blog }}">Blog</a>
-            {%- endif -%}
-            {%- if project.links.github %}
-            <a href="https://github.com/pens/{{ project.links.github }}">GitHub</a>
-            {%- endif -%}
-            {%- if project.links.youtube %}
-            <a href="https://youtu.be/{{ project.links.youtube }}">YouTube</a>
-            {%- endif -%}
-            </p>
+        <h2>{{ category.name }}</h2>
+        <div class="project_container">
+            {%- for project in category.projects -%}
+            <div class="project">
+                <hgroup>
+                    <h2>{{ project.name }}</h2>
+                    <p>{{ project.subtitle }}, {{ project.year }}</p>
+                </hgroup>
+                <img src="assets/projects/{{ project.links.image }}" alt="Image of {{ project.name }}"/>
+                <p>{{ project.description }}</p>
+                <p>
+                {%- if project.links.arxiv %}
+                <a href="https://arxiv.org/abs/{{ project.links.arxiv }}">ArXiv</a>
+                {%- endif -%}
+                {%- if project.links.blog %}
+                <a href="blog/{{ project.links.blog }}">Blog</a>
+                {%- endif -%}
+                {%- if project.links.github %}
+                <a href="https://github.com/pens/{{ project.links.github }}">GitHub</a>
+                {%- endif -%}
+                {%- if project.links.youtube %}
+                <a href="https://youtu.be/{{ project.links.youtube }}">YouTube</a>
+                {%- endif -%}
+                </p>
+            </div>
+            {%- endfor -%}
         </div>
-        {%- endfor -%}
     </section>
+    {%- endfor -%}
 </main>
