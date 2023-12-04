@@ -10,7 +10,7 @@
       image: cmdle.png
       blog: cmdle
       github: cmdle
-  - name: "Color of Cities"
+  - name: "The Colors of Cities"
     subtitle: "Art from StreetView"
     description: "Making art from OpenStreetMap and Google Street View to represent the colors of cities."
     year: 2022
