@@ -18,6 +18,7 @@ defaults:
 exclude: ["README.md", "LICENSE", "Gemfile*", "CNAME", "serve.sh"]
 
 plugins:
+  - github-pages
   - jekyll-feed          # Atom (RSS) Feed
   - jekyll-redirect-from # Redirecting old paths
   - jekyll-seo-tag       # Metadata tags

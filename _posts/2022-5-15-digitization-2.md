@@ -1,7 +1,7 @@
 ---
 title: Digitization, Part 2
 excerpt: How I scanned my family photos, twice.
-tag: project
+tag: photo project
 ---
 
 It's now been two years since my [previous post](/blog/digitization), and it's time for an update.

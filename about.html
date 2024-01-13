@@ -9,11 +9,11 @@ title: About Me
     </p>
     <p>
         My main interest is in real-time rendering, and how this technology can be applied to build new realities.
-        I've been able to help build some really cool products to this end during my <a href="/career">career</a>.
+        I've been able to help build some really cool products to this end during my <a href="{% link career.html %}">career</a>.
     </p>
     <p>
         I love making things, whether software or physical.
-        Check out my <a href="/projects">projects</a> and <a href="/blog">blog</a>.
+        Check out my <a href="{% link projects.html %}">projects</a> and <a href="{% link blog.html %}">blog</a>.
     </p>
     <address>
         {%- for link in site.data.links %}
@@ -21,4 +21,4 @@ title: About Me
         {%- endfor -%}
     </address>
 </article>
-<img class="grid" src="/assets/grid.png" alt="">
+<img class="grid" src="{% link /assets/grid.png %}" alt="">

@@ -1,7 +1,7 @@
 ---
 title: Nightstands
 excerpt: How I built nightstands.
-tag: project
+tag: project wood
 ---
 
 Rather than donating my family's old futon, we opted to reuse the wood for other projects.
