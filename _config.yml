@@ -15,7 +15,7 @@ defaults:
       layout: "post"
 
 # Keep _site clean
-exclude: ["README.md", "LICENSE", "Gemfile*", "CNAME", "serve.sh"]
+exclude: ["CNAME", "Gemfile*", "LICENSE", "README.md", "rgb.sh.code-workspace", "serve.sh"]
 
 plugins:
   - github-pages
