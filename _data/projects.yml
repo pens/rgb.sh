@@ -1,4 +1,4 @@
-- name: "Software"
+- name: "Post-College"
   projects:
   - name: "Mini Escape Room"
     subtitle: "Birthday Gift Puzzle"
@@ -31,6 +31,9 @@
       image: eigenapes.png
       blog: "eigenapes"
       github: eigenapes
+
+- name: "College"
+  projects:
   - name: "Streaming SVD & DMD"
     subtitle: "Research Project"
     description: "Streaming versions of the Singular Value Decomposition and Dynamic Mode Decomposition, allowing for real-time background subtraction (among other uses)."
@@ -92,7 +95,7 @@
       github: kinect_laser_harp
       youtube: cuG4zneXyhA
 
-- name: "Wood"
+- name: "Woodworking"
   projects:
   - name: "Boos Bass"
     subtitle: "Electric Cutting Board"
@@ -121,3 +124,25 @@
     links:
       image: headboard.jpg
       blog: headboard
+
+- name: "Miscellaneous"
+  projects:
+  - name: "Game of Life"
+    subtitle: "WebGL Game of Life."
+    description: "I hacked this together for fun way back."
+    year: 2018
+    tags:
+      - graphics
+      - software
+    links:
+      image: gol.png
+      url: /misc/gol
+  - name: "Hacker Text"
+    subtitle: "JavaScript Text Effect"
+    description: "Movie-hacker-style appearance of text from random characters."
+    year: 2018
+    tags:
+      - software
+    links:
+      image: hackertext.png
+      url: /misc/hackertext
