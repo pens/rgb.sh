@@ -4,7 +4,7 @@ excerpt: How I evaluated what I'm about over the last couple of years.
 tags: thoughts
 ---
 
-{% include image.html alt="My Faces" src="/assets/blog/experimentation/many_faces.jpg" cap="I've played around with my personal appearance a lot the last few years." %}
+{% include image.html alt="My Faces" src="many_faces.jpg" cap="I've played around with my personal appearance a lot the last few years." %}
 
 I often joke that if I have kids, I want to have twins (or, really, any n-tuplets) so that I could A/B test them.
 While this is *not actually okay*, one *can* experiment on themselves.
@@ -57,7 +57,7 @@ We also have an absolute obsession with improving productivity, merely for the s
 This yak-shaving over note-taking apps and setups and keyboards and frameworks doesn't seem to get us any closer to actually just building something.
 But herein lies that same drive towards perfection.
 
-{% include image.html alt="Handmade Cutting Board" src="/assets/blog/experimentation/cutting_board.jpg" cap="A cutting board my father and I built last year. This was my first real woodworking project, and I'm happy to say I kept all ten fingers." %}
+{% include image.html alt="Handmade Cutting Board" src="cutting_board.jpg" cap="A cutting board my father and I built last year. This was my first real woodworking project, and I'm happy to say I kept all ten fingers." %}
 
 ## Process
 
@@ -109,7 +109,7 @@ If I were to do this again, I would lean very heavily into in-person community a
 Lastly, I think I would be more definite in what my overall goal of the project was.
 While it was vaguely "what am I about", approaching it with more structure and regular reviews on progress would have likely improved time efficiency and helped dodge pointless activities.
 
-{% include image.html alt="Me at a Parade" src="/assets/blog/experimentation/parade.jpg" cap="My friend (pictured, left) invited me to join his music group for Seattle's Solstice Festival and Pride Parade. The theme was something along the lines of *Trailer Park Chic*. My performance was terrible, but I had a blast." %}
+{% include image.html alt="Me at a Parade" src="parade.jpg" cap="My friend (pictured, left) invited me to join his music group for Seattle's Solstice Festival and Pride Parade. The theme was something along the lines of *Trailer Park Chic*. My performance was terrible, but I had a blast." %}
 
 ## Specifics
 
@@ -147,7 +147,7 @@ This turned out to take way longer than expected, and it was a complete struggle
 I could not get myself to do more than a couple hours of work a day, for weeks.
 So perhaps it was a fitting last project to take on (at least for quite a while!).
 
-{% include image.html alt="Stripped Car Interior" src="/assets/blog/experimentation/car.jpg" cap="My last real experiment: seeing if I enjoyed working with cars. I installed a new radio, added a dash cam and stripped the entire interior down in order to cover it in sound deadener. Wireless CarPlay: Yay! Panel Removal: Nay." %}
+{% include image.html alt="Stripped Car Interior" src="car.jpg" cap="My last real experiment: seeing if I enjoyed working with cars. I installed a new radio, added a dash cam and stripped the entire interior down in order to cover it in sound deadener. Wireless CarPlay: Yay! Panel Removal: Nay." %}
 
 ### Video Games
 
@@ -175,7 +175,7 @@ This was fun, and really let me see why I dislike facial hair and that I cannot 
 Lots and lots of iteration and seeing others' styles later, and I can *kind of* express my style in words.
 I'm really not an expert here, so the only real learning I can share is on the importance of intentionality.
 
-{% include image.html alt="Homemade Pretzels" src="/assets/blog/experimentation/pretzels.jpg" cap="Over the quarantine, I perfected the soft pretzel. While these came out great using washing soda, I've had even better results finally biting the bullet and using lye. The secret to good pretzels is drain cleaner." %}
+{% include image.html alt="Homemade Pretzels" src="pretzels.jpg" cap="Over the quarantine, I perfected the soft pretzel. While these came out great using washing soda, I've had even better results finally biting the bullet and using lye. The secret to good pretzels is drain cleaner." %}
 
 ### Moving
 

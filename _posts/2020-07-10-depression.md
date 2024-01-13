@@ -4,7 +4,7 @@ excerpt: About depression.
 tags: mental
 ---
 
-{% include image.html alt="Depression" src="/assets/blog/depression/dep.jpg" cap="Depression, visualized." %}
+{% include image.html alt="Depression" src="dep.jpg" cap="Depression, visualized." %}
 
 For the majority of my life, I've dealt with depression.
 It's a subject that is not easy to talk about, as no one wants to be treated differently or have their opinions discounted because of it.

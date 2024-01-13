@@ -9,7 +9,7 @@ Since then, I've ended up scanning all of my family's photos from around the tim
 Due to poor digital organization practices on my end, I've had to scan all of these photos twice.
 Let me share some tips about scanning large volumes of photos, and how not to repeat my mix-up.
 
-{% include image.html alt="Photos" src="/assets/blog/digitization-2/photos.jpg" cap="The boxes shown contain 11000 family photos. I have scanned every single one, twice." %}
+{% include image.html alt="Photos" src="photos.jpg" cap="The boxes shown contain 11000 family photos. I have scanned every single one, twice." %}
 
 ## Scanning Setup
 
