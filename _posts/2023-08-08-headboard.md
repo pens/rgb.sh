@@ -9,8 +9,7 @@ We had been using them to keep leaves from coming under our patio railing, but o
 
 ## Cleanup and Gluing
 
-![Step 1](/assets/blog/headboard/1.jpg)
-*Mockup of headboard, with rows marked by letter.*
+{% include image.html alt="Step 1" src="/assets/blog/headboard/1.jpg" cap="Mockup of headboard, with rows marked by letter." %}
 
 As the boards had been sitting out for around a year, they did need some cleanup.
 I planed the edges to get a clean, square face for edge gluing.
@@ -19,8 +18,7 @@ The faces were left for the later smoothing pass.
 I used a radial arm saw to cut the boards down to length.
 Sizes were chosen to make a nice pattern.
 
-![Step 2](/assets/blog/headboard/2.jpg)
-*Initial glue up.*
+{% include image.html alt="Step 2" src="/assets/blog/headboard/2.jpg" cap="Initial glue up." %}
 
 I made a couple of mistakes during glue-up.
 I should have covered the clamps to prevent spills from drying on.
@@ -30,8 +28,7 @@ This process took about a week as I could only glue a couple of boards per day.
 
 ## Smoothing
 
-![Step 3](/assets/blog/headboard/3.jpg)
-*Post-gluing and sanding.*
+{% include image.html alt="Step 3" src="/assets/blog/headboard/3.jpg" cap="Post-gluing and sanding." %}
 
 I cut down the sides of the headboard to get it roughly square with a circular saw and a straight edge.
 
@@ -47,17 +44,13 @@ I'm very happy with how smooth this got the surface of the headboard.
 
 ## Finishing
 
-![Step 4](/assets/blog/headboard/4.jpg)
-*Applying polyurethane.
-Our air has a lot of particulate in it so I used a plastic cover to avoid things getting caught in the finish.*
+{% include image.html alt="Step 4" src="/assets/blog/headboard/4.jpg" cap="Applying polyurethane. Our air has a lot of particulate in it so I used a plastic cover to avoid things getting caught in the finish." %}
 
 I chose polyurethane for this project to help seal in anything within the wood.
 I had noticed a fair bit of sap on the surface during the glue-up and sanding phases and didn't want this to seep out.
 I also really like the shiny, but natural, appearance of polyurethane.
 
-![Step 5](/assets/blog/headboard/5.jpg)
-*As some of the boards were still a little green, I suspect they may warp more over time.
-I bought some metal braces off Amazon to help reinforce the headboard.*
+{% include image.html alt="Step 5" src="/assets/blog/headboard/5.jpg" cap="As some of the boards were still a little green, I suspect they may warp more over time. I bought some metal braces off Amazon to help reinforce the headboard." %}
 
 The wood boards required way more force than I anticipated during glue-up (due to lack of control over board widths).
 Being that they were green (fresh) when purchased, I expect they will contract over time.
@@ -65,8 +58,7 @@ I added a bunch of metal braces to the back of the headboard to mitigate this.
 
 ## Mounting
 
-![Step 6](/assets/blog/headboard/6.jpg)
-*I had serious trouble getting the holes aligned, because I didn't measure them out ahead of time.*
+{% include image.html alt="Step 6" src="/assets/blog/headboard/6.jpg" cap="I had serious trouble getting the holes aligned, because I didn't measure them out ahead of time." %}
 
 By this point I was more wanting the headboard to be done than wanting to do a good job.
 This is the worst way to work with wood.
@@ -79,8 +71,7 @@ If I ever have to do this again I'm just going to measure everything out properl
 
 ## Result
 
-![Step 7](/assets/blog/headboard/7.jpg)
-*My new headboard.*
+{% include image.html alt="Step 7" src="/assets/blog/headboard/7.jpg" cap="My new headboard." %}
 
 I'm actually quite proud of this outcome given all the mistakes I made along the way.
 This project really made it sink in how okay it really is to make mistakes in doing things.
