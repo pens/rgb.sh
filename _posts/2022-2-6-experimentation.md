@@ -1,6 +1,7 @@
 ---
 title: Self-Experimentation
 excerpt: How I evaluated what I'm about over the last couple of years.
+tags: thoughts
 ---
 
 ![My Faces](/assets/blog/experimentation/many_faces.jpg)

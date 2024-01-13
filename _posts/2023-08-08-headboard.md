@@ -1,7 +1,7 @@
 ---
 title: Headboard
 excerpt: How I built a headboard.
-tag: project
+tag: project wood
 ---
 
 I had a bunch of 2x6's laying around outside, and decided to make them into a shiny new headboard.

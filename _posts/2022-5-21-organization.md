@@ -1,6 +1,7 @@
 ---
 title: Photo Organization
 excerpt: How I finally managed to get a handle on my photo catalog, on Linux.
+tags: photo project
 ---
 
 About a month ago I *finally* finished getting my photo organization system together.

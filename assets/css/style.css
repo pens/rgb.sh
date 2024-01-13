@@ -259,17 +259,18 @@ article.post pre {
 article.post code {
     font-size: 80%;
 }
+article.post figure {
+    margin: 1rem 0;
+}
 article.post img, article.post video {
     display: block;
     margin: 2rem auto .5rem;
-    max-width: 640px;
     width: 100%;
 }
-article.post img + em, article.post video + em {
+article.post figcaption {
     display: block;
     font-size: .8em;
     margin: .5rem auto 2rem;
-    max-width: 640px;
     width: 100%;
 }
 .highlight .hll { background-color: #49483e }
