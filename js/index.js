@@ -158,7 +158,7 @@ img.onload = function() {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
     gl.generateMipmap(gl.TEXTURE_2D);
 }
-img.src = '/assets/8bitme.png';
+img.src = '/img/8bitme.png';
 
 let uTrans = gl.getUniformLocation(p, 'uTrans');
 

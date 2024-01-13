@@ -15,9 +15,12 @@ redirect_from:
                     <h2>{{ project.name }}</h2>
                     <p>{{ project.subtitle }}, {{ project.year }}</p>
                 </hgroup>
-                <img src="assets/projects/{{ project.links.image }}" alt="Image of {{ project.name }}"/>
+                <img src="{{ project.links.image }}" alt="Image of {{ project.name }}"/>
                 <p>{{ project.description }}</p>
                 <p>
+                {%- if project.links.url %}
+                <a href="{{ project.links.url }}">{{ project.links.url }}</a>
+                {%- endif -%}
                 {%- if project.links.arxiv %}
                 <a href="https://arxiv.org/abs/{{ project.links.arxiv }}">ArXiv</a>
                 {%- endif -%}
