@@ -1,5 +1,5 @@
 url: https://rgb.sh
-permalink: blog/:title
+permalink: blog/:title/
 theme: null
 
 # Configure Layouts
