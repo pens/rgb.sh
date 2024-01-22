@@ -136,7 +136,7 @@
       - software
     links:
       image: gol.png
-      url: /misc/gol
+      url: /projects/gol/
   - name: "Hacker Text"
     subtitle: "JavaScript Text Effect"
     description: "Movie-hacker-style appearance of text from random characters."
@@ -145,4 +145,4 @@
       - software
     links:
       image: hackertext.png
-      url: /misc/hackertext
+      url: /projects/hackertext/
