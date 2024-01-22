@@ -273,6 +273,10 @@ article.post figcaption {
     margin: .5rem auto 2rem;
     width: 100%;
 }
+article.post .note {
+    background-color: #979ba2;
+    border-left: 5px solid #000088;
+}
 .highlight .hll { background-color: #49483e }
 .highlight  { background: #272822; color: #f8f8f2 }
 .highlight .c { color: #75715e } /* Comment */
