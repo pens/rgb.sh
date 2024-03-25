@@ -109,7 +109,7 @@ If I were to do this again, I would lean very heavily into in-person community a
 Lastly, I think I would be more definite in what my overall goal of the project was.
 While it was vaguely "what am I about", approaching it with more structure and regular reviews on progress would have likely improved time efficiency and helped dodge pointless activities.
 
-{% include image.html alt="Me at a Parade" src="parade.jpg" cap="My friend (pictured, left) invited me to join his music group for Seattle's Solstice Festival and Pride Parade. The theme was something along the lines of *Trailer Park Chic*. My performance was terrible, but I had a blast." %}
+{% include image.html alt="Me at a Parade" src="parade.jpg" cap="My friend (pictured, left) invited me to join his music group for Seattle's Solstice Festival and Pride Parade. The theme was something along the lines of <em>Trailer Park Chic</em>. My performance was terrible, but I had a blast." %}
 
 ## Specifics
 
