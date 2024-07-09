@@ -5,11 +5,16 @@ layout: base
     <a href="/">
         <span class="r">r</span><span class="g">g</span><span class ="b">b</span>.sh
     </a>
-
-    <a href="{% link feed.xml %}" class="rss">RSS</a>
 </header>
 {{ content }}
 <footer>
-    <a href="/">Home</a>
-    <p>Copyright (c) 2017-{{ site.time | date: "%Y" }} Seth Pendergrass.</p>
+    <nav>
+        <a href="{% link index.html %}">Home</a>
+        <a href="{% link about.html %}">About Me</a>
+        <a href="{% link blog.html %}">Blog</a>
+        <a href="{% link career.html %}">Career</a>
+        <a href="{% link projects.html %}">Projects</a>
+        <a href="{% link feed.xml %}" class="rss">RSS</a>
+    </nav>
+    <p>copyright (c) 2017-{{ site.time | date: "%Y" }} seth pendergrass</p>
 </footer>
