@@ -1,7 +1,3 @@
----
-layout: none
----
-// Front matter allows Jekyll to insert shaders
 import * as THREE from '/js/three/build/three.module.js';
 import { OrbitControls } from '/js/three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from '/js/three/examples/jsm/libs/dat.gui.module.js';
@@ -96,8 +92,28 @@ let mat = new THREE.ShaderMaterial({
         clip: { value: false }
     },
     vertexColors: true,
-    vertexShader: `{% include blog/transform/transform.vert %}`,
-    fragmentShader: `{% include blog/transform/transform.frag %}`
+    vertexShader: `
+        uniform bool clip;
+        varying vec4 pos;
+        varying vec3 vertexColor;
+
+        void main() {
+            vertexColor = color;
+            pos = modelMatrix * vec4(position, 1.0);
+            gl_Position = projectionMatrix * viewMatrix * pos;
+        }`,
+    fragmentShader: `
+        uniform bool clip;
+        varying vec4 pos;
+        varying vec3 vertexColor;
+
+        void main() {
+            if (clip && any(greaterThan(abs(pos.xyz), vec3(pos.w)))) {
+                gl_FragColor = vec4(vertexColor / 2., 1);
+            } else {
+                gl_FragColor = vec4(vertexColor, 1);
+            }
+        }`
 });
 let cube = new THREE.Mesh(geo, mat);
 cube.matrixAutoUpdate = false;
