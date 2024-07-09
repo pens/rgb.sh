@@ -34,9 +34,9 @@ h1 {
     font-family: 'Futura', sans-serif;
     font-size: 4em;
     font-weight: normal;
-    text-transform: lowercase;
     line-height: .75;
     margin: 0 0 4rem;
+    text-transform: lowercase;
 }
 h2 {
     font-family: 'Futura', sans-serif;
@@ -44,13 +44,15 @@ h2 {
     font-weight: normal;
     line-height: 1;
     margin: 0;
+    text-transform: lowercase;
 }
 h3, h4 {
+    color: #d3d8e0;
     font-family: 'Monaco', monospace;
     font-size: 1rem;
     font-weight: normal;
     margin: 0;
-    color: #d3d8e0;
+    text-transform: lowercase;
 }
 header {
     margin-bottom: 2rem;
@@ -73,6 +75,16 @@ p {
 }
 .b {
     color: blue;
+}
+
+nav a {
+    text-transform: lowercase;
+}
+.project a {
+    text-transform: lowercase;
+}
+address a {
+    text-transform: lowercase;
 }
 
 /* Index */
@@ -166,7 +178,7 @@ a.post:hover * {
 .job {
     margin: 2rem 0;
 }
-.job h2, .job p {
+.job > * {
     background-color: rgba(0, 0, 0, .8);
     width: fit-content;
 }

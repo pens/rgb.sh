@@ -128,7 +128,7 @@
 - name: "Miscellaneous"
   projects:
   - name: "Game of Life"
-    subtitle: "WebGL Game of Life."
+    subtitle: "WebGL Game of Life"
     description: "I hacked this together for fun way back."
     year: 2018
     tags:
