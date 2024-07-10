@@ -6,20 +6,20 @@ redirect_from:
 <main>
     <h1>{{ page.title }}</h1>
     {%- for category in site.data.projects -%}
-    <section class="projects">
+    <section>
         <h2>{{ category.name }}</h2>
-        <div class="project_container">
+        <div class="project-flex">
             {%- for project in category.projects -%}
             <div class="project">
                 <hgroup>
                     <h2>{{ project.name }}</h2>
-                    <h3>{{ project.subtitle }}, {{ project.year }}</h3>
+                    <p>{{ project.subtitle }} | {{ project.year }}</p>
                 </hgroup>
                 <img src="{{ project.links.image }}" alt="Image of {{ project.name }}"/>
                 <p>{{ project.description }}</p>
                 <p>
                 {%- if project.links.url %}
-                <a href="{{ project.links.url }}">{{ project.links.url }}</a>
+                <a href="{{ project.links.url }}">Link</a>
                 {%- endif -%}
                 {%- if project.links.arxiv %}
                 <a href="https://arxiv.org/abs/{{ project.links.arxiv }}">ArXiv</a>
