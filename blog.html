@@ -7,7 +7,7 @@ title: Blog
     </header>
     {%- for post in site.posts -%}
     <section>
-        <a class="post" href="{{ post.url }}">
+        <a class="post-link" href="{{ post.url }}">
         <hgroup>
             <h2>{{ post.title }}</h2>
             <p>{{ post.date | date: '%B %e %Y' }}</p>
@@ -17,6 +17,6 @@ title: Blog
     </section>
     {%- endfor -%}
 </article>
-<img class="t t1" src="{% link img/tri1.png %}" alt="">
-<img class="t t2" src="{% link img/tri2.png %}" alt="">
-<img class="t t3" src="{% link img/tri3.png %}" alt="">
+<img class="t1" src="{% link img/tri1.png %}" alt="">
+<img class="t2" src="{% link img/tri2.png %}" alt="">
+<img class="t3" src="{% link img/tri3.png %}" alt="">
