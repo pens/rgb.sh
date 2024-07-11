@@ -7,14 +7,14 @@ layout: base
     </a>
 </header>
 {{ content }}
-<footer>
-    <nav>
+<footer class="bg">
+    <p>
         <a href="{% link index.html %}">Home</a>
         <a href="{% link about.html %}">About Me</a>
         <a href="{% link blog.html %}">Blog</a>
         <a href="{% link career.html %}">Career</a>
         <a href="{% link projects.html %}">Projects</a>
         <a href="{% link feed.xml %}">RSS</a>
-    </nav>
+    </p>
     <p>copyright (c) 2017-{{ site.time | date: "%Y" }} seth pendergrass</p>
 </footer>
