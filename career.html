@@ -3,12 +3,12 @@ title: Career
 redirect_from:
 - /work
 ---
-<article>
+<main>
     <header>
         <h1>{{ page.title }}</h1>
     </header>
     {%- for job in site.data.career -%}
-    <section class="job">
+    <section class="bg">
         <hgroup>
             <h2>{{ job.company }}</h2>
             <p>{{ job.team }} | {{ job.date }}</p>
@@ -16,5 +16,5 @@ redirect_from:
         <p>{{ job.desc }}</p>
     </section>
     {%- endfor -%}
-</article>
+</main>
 <img class="mask" src="{% link img/mask.png %}" alt="">

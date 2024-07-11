@@ -34,8 +34,13 @@ address {
     font-style: normal;
 }
 
-article {
+article,
+main {
     margin: 0 auto;
+}
+
+article,
+main:not(.wide) {
     max-width: 640px;
 }
 
@@ -93,10 +98,6 @@ h4 {
     margin: 3rem 0 2rem;
 }
 
-nav {
-    font-family: monospace;
-}
-
 p {
     font-size: 100%;
     line-height: initial;
@@ -128,8 +129,18 @@ article video {
     width: 100%;
 }
 
-article p {
+article p,
+main p {
     margin: 1rem 0;
+}
+
+/*
+    Callout.
+*/
+
+.note {
+    background-color: #979ba2;
+    border-left: 5px solid #000088;
 }
 
 /*
@@ -152,15 +163,6 @@ section hgroup+p {
 }
 
 /*
-    Callout.
-*/
-
-.note {
-    background-color: #979ba2;
-    border-left: 5px solid #000088;
-}
-
-/*
     Lowercase.
 */
 
@@ -169,30 +171,33 @@ h2,
 h3,
 hgroup p,
 h4,
-address a,
 nav a,
-.project a {
+.bg a {
     text-transform: lowercase;
+}
+
+/*
+    Monospace links.
+*/
+
+nav a,
+.bg a {
+    font-family: monospace;
 }
 
 /*
     Shaded text background.
 */
 
-/* > to avoid double background. */
-hgroup>*,
-footer>*,
-.about>address,
-.about>p,
-.job>p,
-.post-link>p,
-.project>p {
+.bg address,
+.bg h2,
+.bg p {
     background-color: rgba(0, 0, 0, .8);
     width: fit-content;
 }
 
 /*
-    Index page.
+    Home page.
 */
 
 h1.idx {
@@ -250,6 +255,10 @@ nav.idx li {
     /* Remove spacing from linebreak after. */
     object-fit: cover;
     width: 100%;
+}
+
+.project p {
+    margin: 0;
 }
 
 /*

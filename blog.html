@@ -1,13 +1,13 @@
 ---
 title: Blog
 ---
-<article>
+<main>
     <header>
         <h1>{{ page.title }}</h1>
     </header>
     {%- for post in site.posts -%}
     <section>
-        <a class="post-link" href="{{ post.url }}">
+        <a class="bg post-link" href="{{ post.url }}">
         <hgroup>
             <h2>{{ post.title }}</h2>
             <p>{{ post.date | date: '%B %e %Y' }}</p>
@@ -16,7 +16,7 @@ title: Blog
         </a>
     </section>
     {%- endfor -%}
-</article>
+</main>
 <img class="t1" src="{% link img/tri1.png %}" alt="">
 <img class="t2" src="{% link img/tri2.png %}" alt="">
 <img class="t3" src="{% link img/tri3.png %}" alt="">

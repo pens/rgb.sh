@@ -3,14 +3,14 @@ title: Projects
 redirect_from:
 - /college
 ---
-<main>
+<main class="wide">
     <h1>{{ page.title }}</h1>
     {%- for category in site.data.projects -%}
     <section>
         <h2>{{ category.name }}</h2>
         <div class="project-flex">
             {%- for project in category.projects -%}
-            <div class="project">
+            <div class="bg project">
                 <hgroup>
                     <h2>{{ project.name }}</h2>
                     <p>{{ project.subtitle }} | {{ project.year }}</p>
