@@ -17,6 +17,8 @@ defaults:
 # Keep _site clean
 exclude: ["CNAME", "Gemfile*", "LICENSE", "README.md", "rgb.sh.code-workspace", "serve.sh"]
 
+include: [".well-known"]
+
 plugins:
   - github-pages
   - jekyll-feed          # Atom (RSS) Feed
