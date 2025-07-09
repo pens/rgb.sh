@@ -4,7 +4,7 @@ scripts:
     - transform.js
 styles:
     - transform.css
-excerpt: An interactive journey through the matrix transformations of the rendering pipeline.
+excerpt: An interactive journey through the matrix transformations of the rendering pipeline
 math: true
 tags: graphics
 ---

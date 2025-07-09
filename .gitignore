@@ -1,4 +1,5 @@
 _site
+.bundle/
 .DS_Store
 Gemfile.lock
 rgb.sh.code-workspace

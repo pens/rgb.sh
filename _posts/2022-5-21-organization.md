@@ -1,6 +1,6 @@
 ---
 title: Photo Organization
-excerpt: How I finally managed to get a handle on my photo catalog, on Linux.
+excerpt: How I finally managed to get a handle on my photo catalog, on Linux
 tags: photo project
 ---
 
@@ -36,7 +36,7 @@ My goals from this project were to be able to:
 
 ## File Management
 
-{% include image.html alt="Folder Structure" src="folders.png" cap="Organization of my photos folder. While not necessary to have subfolders given tags for organization, it makes it convenient to not have all of your photos in one folder. Thus I used a minimal YYYY/MM folder structure to keep file counts reasonable." %}
+{% include img alt="Folder Structure" src="folders.png" cap="Organization of my photos folder. While not necessary to have subfolders given tags for organization, it makes it convenient to not have all of your photos in one folder. Thus I used a minimal YYYY/MM folder structure to keep file counts reasonable." %}
 
 The first step in this process was getting my old photo catalog into shape on disk.
 I set myself up with a [NAS](https://en.wikipedia.org/wiki/Network-attached_storage) with automatic cloud backup, and moved my photo catalog to it.
@@ -78,7 +78,7 @@ I had to go through my whole catalog, top to bottom, looking for shots that were
 
 ## Geolocation
 
-{% include image.html alt="Geolocation" src="gps.png" cap="The Map menu has an awesome 3D map of all geotagged shots. This is great for reliving a past trip." %}
+{% include img alt="Geolocation" src="gps.png" cap="The Map menu has an awesome 3D map of all geotagged shots. This is great for reliving a past trip." %}
 
 Next up, geolocation.
 Being able to filter photos by location is awesome.
@@ -94,11 +94,11 @@ For example, Geo/Croatia/Split would include shots from [Krka National Park](htt
 Hierarchical tags (versus flat) are nice because I don't have to always query from a leaf in the tree, and photos do not have to live in a leaf node.
 Many photos from my NYC-to-Seattle road trip are just tagged by state and not city.
 
-{% include image.html alt="Manual Location Tags" src="manual geo.png" cap="The Tags menu is the backbone of photo organization. Here, I show my manual Geo tag hierarchy, which I use to organize photos into more general locations versus the specific GPS coordinates in the EXIF." %}
+{% include img alt="Manual Location Tags" src="manual geo.png" cap="The Tags menu is the backbone of photo organization. Here, I show my manual Geo tag hierarchy, which I use to organize photos into more general locations versus the specific GPS coordinates in the EXIF." %}
 
 ## Face Detection
 
-{% include image.html alt="Faces" src="faces.png" cap="The People menu lets you sort by faces. As you associate more faces with a name, it will get better at identifying even more faces. This makes sort photos of yourself and your friends an order of magnitude easier. Names blacked out and faces recreated for anonymity." %}
+{% include img alt="Faces" src="faces.png" cap="The People menu lets you sort by faces. As you associate more faces with a name, it will get better at identifying even more faces. This makes sort photos of yourself and your friends an order of magnitude easier. Names blacked out and faces recreated for anonymity." %}
 
 By far the coolest feature in digiKam is it's face detector.
 Once set up, digiKam will generate a (massive) list of all faces found in your catalog.

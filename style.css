@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017-24 Seth Pendergrass. See LICENSE.
+    Copyright (c) 2017-{{ site.time | date: "%Y" }} Seth Pendergrass. See LICENSE.
 */
 
 /*
@@ -7,10 +7,23 @@
 */
 
 html {
-    background-color: #a8adb5;
-    color: #fafcff;
+    background-color: #222222;
+    color: #dddddd;
     font-family: serif;
     font-size: 16pt;
+}
+
+/*
+    Custom coloring of inlined SVGs.
+*/
+svg {
+    fill: #dddddd;
+    height: auto;
+    stroke: #dddddd;
+    width: 100%;
+}
+svg text {
+    stroke: none;
 }
 
 body {
@@ -25,8 +38,8 @@ a:visited {
 
 a:hover,
 a.post-link:hover * {
-    background-color: #fafcff;
-    color: #000;
+    background-color: #00ff00;
+    color: #000000;
 }
 
 address {
@@ -41,7 +54,7 @@ main {
 
 article,
 main:not(.wide) {
-    max-width: 640px;
+    max-width: 800px;
 }
 
 code {
@@ -50,7 +63,7 @@ code {
 
 figcaption {
     display: block;
-    font-size: .8em;
+    font-size: 1rem;
     margin: .5rem auto 2rem;
     width: 100%;
 }
@@ -64,28 +77,24 @@ footer {
 }
 
 h1 {
-    font-family: sans-serif;
-    font-size: 4em;
+    font-size: 4rem;
 }
 
 h2 {
-    font-family: sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
-/* hgroup p displayed as h3, as hgroup not allowed more than one hX. */
+/*
+    hgroup p displayed as h3, as hgroup not allowed more than one hX.
+    <https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hgroup>
+*/
 h3,
 hgroup p {
-    color: #d3d8e0;
-    font-family: monospace;
-    font-size: 1rem;
+    font-size: 1.6rem;
 }
 
 h4 {
-    color: #d3d8e0;
-    font-family: monospace;
-    font-size: .8rem;
-    text-transform: uppercase;
+    font-size: 1.2rem;
 }
 
 h1,
@@ -93,15 +102,20 @@ h2,
 h3,
 hgroup p,
 h4 {
+    font-family: monospace;
     font-weight: normal;
     line-height: 1;
-    margin: 3rem 0 2rem;
+    margin: 4rem 0 1rem;
 }
 
 p {
     font-size: 100%;
     line-height: initial;
     margin: 0;
+}
+
+hgroup p {
+    color: #aaaaaa;
 }
 
 /* Enable scrolling of code blocks. */
@@ -119,7 +133,7 @@ section {
 */
 
 article header {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 
 article img,
@@ -139,8 +153,12 @@ main p {
 */
 
 .note {
-    background-color: #979ba2;
-    border-left: 5px solid #000088;
+    background-color: #000000;
+}
+.note > div {
+    border-left: .25em solid lime;
+    padding-left: .25em;
+    padding-right: .5em;
 }
 
 /*
@@ -266,6 +284,10 @@ nav.idx li {
 */
 
 /* Website name. */
+.rgb {
+    font-family: monospace;
+}
+
 .r {
     color: red;
 }
@@ -278,13 +300,17 @@ nav.idx li {
     color: blue;
 }
 
+header a.rgb {
+    font-size: 1.5rem;
+}
+
 /* Index: 3D head. */
 canvas#gl {
     bottom: 25%;
-    height: 360px;
+    height: 720px;
     left: 10%;
     position: absolute;
-    width: 640px;
+    width: 1280px;
     z-index: -1;
     /* Allow selecting link when overlapped. */
 }
@@ -350,16 +376,12 @@ canvas#gl {
     }
 
     h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 1.2rem;
+        font-size: 2rem;
     }
 
     /* Index */
     h1.idx {
-        font-size: 5rem;
+        font-size: 4rem;
     }
 
     canvas#gl {

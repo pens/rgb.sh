@@ -1,11 +1,11 @@
 ---
 title: "Eigenapes"
-excerpt: Making NFTs from the principal components of some monkeys.
+excerpt: Making NFTs from the principal components of some monkeys
 math: true
-tag: project
+tags: project
 ---
 
-{% include image.html alt="All Eigenfaces" src="all_eigenfaces.jpg" cap="All 400 of the generated images for my NFT." %}
+{% include img alt="All Eigenfaces" src="all_eigenfaces.jpg" cap="All 400 of the generated images for my NFT." %}
 
 **NOTE:** *I did this project well over a year ago, but left this post 80% finished.
 I've been on a journey to finish or abandon all of the in-progress projects I've got in my backlog.
@@ -46,7 +46,7 @@ It's pretty straightforward to setup IPFS locally and pull down all of the monke
 
 ### Eigenfaces
 
-{% include image.html alt="Main Eigenfaces" src="main_eigenfaces.png" cap="The six most important eigenfaces of the original data set, which I am referring to as eigenapes." %}
+{% include img alt="Main Eigenfaces" src="main_eigenfaces.png" cap="The six most important eigenfaces of the original data set, which I am referring to as eigenapes." %}
 
 I first learned about [Eigenfaces](https://en.wikipedia.org/wiki/Eigenface) in college, and still find them to be a fascinating way to break down a set of like images.
 Finding the principle components of a sequence of images gives you a set of aspects shared across all images as well as their relative importances.
@@ -67,7 +67,7 @@ It seems like the answer is **not really** (visual results reaffirmed this):
 
 #### How Many Singular Values Do We Need?
 
-{% include image.html alt="Reconstruction Error" src="norms.png" cap="We can see that by 400 eigenfaces, we're able to eliminate the vast majority of the error. The input dataset was 10000 images." %}
+{% include img alt="Reconstruction Error" src="norms.png" cap="We can see that by 400 eigenfaces, we're able to eliminate the vast majority of the error. The input dataset was 10000 images." %}
 
 The next question was: how many singular values do I use?
 This can be determined based on the magnitude of the singular values ($$ \mathbf{\Sigma} $$), as this determines the "strength" with which eigenface is applied to a reconstruction.
@@ -75,7 +75,7 @@ What's really cool here is you only need a relatively small number of eigenfaces
 From the input dataset of 10000 monkey pics, we are able to mostly describe them at around 400 eigenfaces / singular values.
 Intuitively, this makes sense because most (all?) apes are just permutations of a smaller set of features (e.g. smiling or not, type of shirt).
 
-{% include image.html alt="Singular Values" src="sing_values.png" cap="Here we can see that the singular values drop off in strength very quickly (left) and that conversely they stop contributing much to the cumulative sum (right)." %}
+{% include img alt="Singular Values" src="sing_values.png" cap="Here we can see that the singular values drop off in strength very quickly (left) and that conversely they stop contributing much to the cumulative sum (right)." %}
 
 ## Making the NFTs
 

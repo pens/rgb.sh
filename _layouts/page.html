@@ -2,7 +2,7 @@
 layout: base
 ---
 <header>
-    <a href="/">
+    <a href="/" class="rgb">
         <span class="r">r</span><span class="g">g</span><span class ="b">b</span>.sh
     </a>
 </header>
@@ -10,10 +10,10 @@ layout: base
 <footer class="bg">
     <p>
         <a href="{% link index.html %}">Home</a>
-        <a href="{% link about.html %}">About Me</a>
-        <a href="{% link blog.html %}">Blog</a>
-        <a href="{% link career.html %}">Career</a>
-        <a href="{% link projects.html %}">Projects</a>
+        <a href="{% link about/index.html %}">About Me</a>
+        <a href="{% link blog/index.html %}">Blog</a>
+        <a href="{% link career/index.html %}">Career</a>
+        <a href="{% link projects/index.html %}">Projects</a>
         <a href="{% link feed.xml %}">RSS</a>
     </p>
     <p>copyright (c) 2017-{{ site.time | date: "%Y" }} seth pendergrass</p>

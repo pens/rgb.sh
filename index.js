@@ -158,34 +158,34 @@ img.onload = function() {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
     gl.generateMipmap(gl.TEXTURE_2D);
 }
-img.src = '/img/8bitme.png';
+img.src = '8bitme.png';
 
 let uTrans = gl.getUniformLocation(p, 'uTrans');
 
 let s = matI();
 let r = matI();
 let t = matI();
-let model_rt = matI();
+let model_centered = matI();
 let model = matI();
 let view = matI();
 let proj = matI();
 let modelView = matI();
 let transform = matI();
 
-matScale(s, 1.3);
+matScale(s, 1);
 matTrans(t, -.5, -.5, -.5);
 matTrans(view, 0, 0, -2);
 matPersp(proj, Math.PI / 2, 16 / 9, .1, 10);
 
 function draw(timestamp) {
-    let yaw = timestamp / 1000;
-    let pitch = timestamp / 2000;
-    let roll = timestamp / 4000;
+    let yaw = Math.sin(timestamp / 1600) * Math.PI / 4;
+    let pitch = Math.sin(timestamp / 800) * Math.PI / 6;
+    let roll = Math.sin(timestamp / 3200) * Math.PI / 8;
     matRot(r, yaw, pitch, roll);
 
     // Translate first: [0, 1] -> [-.5, .5]
-    matMul(model_rt, s, t);
-    matMul(model, r, model_rt);
+    matMul(model_centered, s, t);
+    matMul(model, r, model_centered);
     matMul(modelView, view, model);
     matMul(transform, proj, modelView);
 

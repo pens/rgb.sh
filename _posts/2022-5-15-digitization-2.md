@@ -1,7 +1,7 @@
 ---
-title: Digitization, Part 2
-excerpt: How I scanned my family photos, twice.
-tag: photo project
+title: "Digitization: Part 2"
+excerpt: How I scanned my family photos, twice
+tags: photo project
 ---
 
 It's now been two years since my [previous post](/blog/digitization), and it's time for an update.
@@ -9,7 +9,7 @@ Since then, I've ended up scanning all of my family's photos from around the tim
 Due to poor digital organization practices on my end, I've had to scan all of these photos twice.
 Let me share some tips about scanning large volumes of photos, and how not to repeat my mix-up.
 
-{% include image.html alt="Photos" src="photos.jpg" cap="The boxes shown contain 11000 family photos. I have scanned every single one, twice." %}
+{% include img alt="Photos" src="photos.jpg" cap="The boxes shown contain 11000 family photos. I have scanned every single one, twice." %}
 
 ## Scanning Setup
 
@@ -17,7 +17,7 @@ The first step in scanning the photos was making sure they were organized physic
 Luckily, my mother had kept all of the photos organized roughly chronologically.
 All I had to do was drag the boxes into a spot where I could leave them out for a week while scanning.
 
-I gave each box a unique letter label, and as each envelope of photos was scanned I assigned it serial number.
+I gave each box a unique letter label, and as each envelope of photos was scanned I assigned it a serial number.
 I chose to keep these globally unique across all boxes, just in case they moved around later.
 This number is not critical during scanning, but makes looking up photos later *much* faster (e.g. if I need to redo a scan).
 

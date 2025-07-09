@@ -1,5 +1,15 @@
 - name: "Post-College"
   projects:
+  - name: "Loowit"
+    subtitle: "Custom Eurorack enclosure"
+    description: "An adjustable-curve, flat-pack enclosure I built for my Eurorack setup."
+    year: 2025
+    tags:
+      - electronics
+    links:
+      image: loowit.jpg
+      blog: loowit
+      github: loowit
   - name: "Mini Escape Room"
     subtitle: "Birthday Gift Puzzle"
     description: "A puzzle I put together to hide a birthday present."

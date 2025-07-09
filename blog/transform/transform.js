@@ -1,6 +1,6 @@
-import * as THREE from '/js/three/build/three.module.js';
-import { OrbitControls } from '/js/three/examples/jsm/controls/OrbitControls.js';
-import { GUI } from '/js/three/examples/jsm/libs/dat.gui.module.js';
+import * as THREE from '/three/build/three.module.js';
+import { OrbitControls } from '/three/examples/jsm/controls/OrbitControls.js';
+import { GUI } from '/three/examples/jsm/libs/dat.gui.module.js';
 
 /*
     Coordinate Spaces
