@@ -1,0 +1,92 @@
+<!-- Title: %3 Pages: 1 -->
+<svg width="265pt" height="292pt"
+ viewBox="0.00 0.00 264.54 292.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 288)">
+<title>%3</title>
+<!-- iCloud -->
+<g id="node1" class="node">
+<title>iCloud</title>
+<ellipse fill="transparent" stroke="white" cx="40.3" cy="-265" rx="40.09" ry="18"/>
+<text text-anchor="middle" x="40.3" y="-261.3" font-family="Times,serif" font-size="14.00" fill="white">iCloud</text>
+</g>
+<!-- PC -->
+<g id="node2" class="node">
+<title>PC</title>
+<polygon fill="transparent" stroke="white" points="153.3,-209 99.3,-209 99.3,-173 153.3,-173 153.3,-209"/>
+<text text-anchor="middle" x="126.3" y="-187.3" font-family="Times,serif" font-size="14.00" fill="white">PC</text>
+</g>
+<!-- iCloud&#45;&gt;PC -->
+<g id="edge1" class="edge">
+<title>iCloud&#45;&gt;PC</title>
+<path fill="none" stroke="white" d="M66.48,-242.08C76.49,-233.7 87.94,-224.11 98.13,-215.58"/>
+<polygon fill="white" stroke="white" points="63.96,-239.63 58.53,-248.73 68.45,-244.99 63.96,-239.63"/>
+<polygon fill="white" stroke="white" points="100.56,-218.11 105.98,-209.01 96.06,-212.75 100.56,-218.11"/>
+</g>
+<!-- NAS -->
+<g id="node5" class="node">
+<title>NAS</title>
+<polygon fill="transparent" stroke="white" points="115.8,-127.5 60.8,-127.5 60.8,-91.5 115.8,-91.5 115.8,-127.5"/>
+<text text-anchor="middle" x="88.3" y="-105.8" font-family="Times,serif" font-size="14.00" fill="white">NAS*</text>
+</g>
+<!-- PC&#45;&gt;NAS -->
+<g id="edge4" class="edge">
+<title>PC&#45;&gt;NAS</title>
+<path fill="none" stroke="white" d="M113.57,-163.38C109.49,-154.83 104.97,-145.38 100.89,-136.85"/>
+<polygon fill="white" stroke="white" points="110.58,-165.24 118.05,-172.75 116.9,-162.22 110.58,-165.24"/>
+<polygon fill="white" stroke="white" points="104,-135.23 96.53,-127.72 97.68,-138.25 104,-135.23"/>
+</g>
+<!-- hdd -->
+<g id="node7" class="node">
+<title>hdd</title>
+<polygon fill="transparent" stroke="white" points="194.8,-136 133.8,-136 133.8,-83 194.8,-83 194.8,-136"/>
+<text text-anchor="middle" x="164.3" y="-120.8" font-family="Times,serif" font-size="14.00" fill="white">USB</text>
+<text text-anchor="middle" x="164.3" y="-105.8" font-family="Times,serif" font-size="14.00" fill="white">hard</text>
+<text text-anchor="middle" x="164.3" y="-90.8" font-family="Times,serif" font-size="14.00" fill="white">drives</text>
+</g>
+<!-- PC&#45;&gt;hdd -->
+<g id="edge6" class="edge">
+<title>PC&#45;&gt;hdd</title>
+<path fill="none" stroke="white" d="M134.54,-172.75C138.37,-164.74 143.07,-154.9 147.6,-145.44"/>
+<polygon fill="white" stroke="white" points="150.87,-146.71 152.02,-136.18 144.55,-143.69 150.87,-146.71"/>
+</g>
+<!-- sd -->
+<g id="node3" class="node">
+<title>sd</title>
+<polygon fill="transparent" stroke="white" points="154.3,-284 98.3,-284 98.3,-246 154.3,-246 154.3,-284"/>
+<text text-anchor="middle" x="126.3" y="-268.8" font-family="Times,serif" font-size="14.00" fill="white">SD</text>
+<text text-anchor="middle" x="126.3" y="-253.8" font-family="Times,serif" font-size="14.00" fill="white">cards</text>
+</g>
+<!-- sd&#45;&gt;PC -->
+<g id="edge2" class="edge">
+<title>sd&#45;&gt;PC</title>
+<path fill="none" stroke="white" d="M126.3,-245.83C126.3,-237.89 126.3,-228.41 126.3,-219.63"/>
+<polygon fill="white" stroke="white" points="129.8,-219.42 126.3,-209.42 122.8,-219.42 129.8,-219.42"/>
+</g>
+<!-- shared -->
+<g id="node4" class="node">
+<title>shared</title>
+<ellipse fill="transparent" stroke="white" cx="214.3" cy="-265" rx="42.49" ry="18"/>
+<text text-anchor="middle" x="214.3" y="-261.3" font-family="Times,serif" font-size="14.00" fill="white">shared</text>
+</g>
+<!-- shared&#45;&gt;PC -->
+<g id="edge3" class="edge">
+<title>shared&#45;&gt;PC</title>
+<path fill="none" stroke="white" d="M187.87,-242.38C177.47,-233.87 165.49,-224.07 154.89,-215.39"/>
+<polygon fill="white" stroke="white" points="185.68,-245.11 195.63,-248.73 190.11,-239.69 185.68,-245.11"/>
+<polygon fill="white" stroke="white" points="157.04,-212.64 147.09,-209.01 152.61,-218.05 157.04,-212.64"/>
+</g>
+<!-- DropBox -->
+<g id="node6" class="node">
+<title>DropBox</title>
+<ellipse fill="transparent" stroke="white" cx="88.3" cy="-18" rx="51.19" ry="18"/>
+<text text-anchor="middle" x="88.3" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">DropBox</text>
+</g>
+<!-- NAS&#45;&gt;DropBox -->
+<g id="edge5" class="edge">
+<title>NAS&#45;&gt;DropBox</title>
+<path fill="none" stroke="white" stroke-dasharray="1,5" d="M88.3,-91.24C88.3,-78.49 88.3,-60.87 88.3,-46.23"/>
+<polygon fill="white" stroke="white" points="91.8,-46.2 88.3,-36.2 84.8,-46.2 91.8,-46.2"/>
+<text text-anchor="middle" x="100.8" y="-57" font-family="Times,serif" font-size="10.00" fill="white">daily</text>
+</g>
+</g>
+</svg>

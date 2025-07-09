@@ -1,0 +1,83 @@
+<svg width="287pt" height="312pt"
+ viewBox="0.00 0.00 287.00 312.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 308)">
+<title>%3</title>
+<g id="clust1" class="cluster">
+<title>cluster_nas</title>
+<polygon fill="transparent" stroke="white" points="8,-8 8,-296 153,-296 153,-8 8,-8"/>
+<text text-anchor="middle" x="80.5" y="-280.8" font-family="Times,serif" font-size="14.00" fill="white">NAS</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_pc</title>
+<polygon fill="transparent" stroke="white" points="169,-8 169,-85 271,-85 271,-8 169,-8"/>
+<text text-anchor="middle" x="220" y="-69.8" font-family="Times,serif" font-size="14.00" fill="white">PC</text>
+</g>
+<!-- images -->
+<g id="node1" class="node">
+<title>images</title>
+<polygon fill="transparent" stroke="white" points="134,-265 66,-265 66,-229 134,-229 134,-265"/>
+<text text-anchor="middle" x="100" y="-243.3" font-family="Times,serif" font-size="14.00" fill="white">images</text>
+</g>
+<!-- xmp -->
+<g id="node2" class="node">
+<title>xmp</title>
+<polygon fill="transparent" stroke="white" points="138,-171 62,-171 62,-133 138,-133 138,-171"/>
+<text text-anchor="middle" x="100" y="-155.8" font-family="Times,serif" font-size="14.00" fill="white">XMP</text>
+<text text-anchor="middle" x="100" y="-140.8" font-family="Times,serif" font-size="14.00" fill="white">sidecars</text>
+</g>
+<!-- images&#45;&gt;xmp -->
+<g id="edge1" class="edge">
+<title>images&#45;&gt;xmp</title>
+<path fill="none" stroke="white" d="M100,-228.94C100,-215.65 100,-196.9 100,-181.36"/>
+<polygon fill="white" stroke="white" points="103.5,-181.22 100,-171.22 96.5,-181.22 103.5,-181.22"/>
+<text text-anchor="middle" x="117" y="-203" font-family="Times,serif" font-size="10.00" fill="white">on</text>
+<text text-anchor="middle" x="117" y="-192" font-family="Times,serif" font-size="10.00" fill="white">import</text>
+</g>
+<!-- digiKam -->
+<g id="node3" class="node">
+<title>digiKam</title>
+<polygon fill="transparent" stroke="white" points="121,-54 33,-54 33,-16 121,-16 121,-54"/>
+<text text-anchor="middle" x="77" y="-38.8" font-family="Times,serif" font-size="14.00" fill="white">digiKam</text>
+<text text-anchor="middle" x="77" y="-23.8" font-family="Times,serif" font-size="14.00" fill="white">database*</text>
+</g>
+<!-- xmp&#45;&gt;digiKam -->
+<g id="edge2" class="edge">
+<title>xmp&#45;&gt;digiKam</title>
+<path fill="none" stroke="white" d="M61.91,-138.37C51.33,-132.91 41.09,-125.34 35,-115 24.73,-97.56 35.79,-77.41 49.13,-61.83"/>
+<polygon fill="white" stroke="white" points="52.02,-63.86 56.21,-54.13 46.87,-59.12 52.02,-63.86"/>
+<text text-anchor="middle" x="53.5" y="-107" font-family="Times,serif" font-size="10.00" fill="white">on</text>
+<text text-anchor="middle" x="53.5" y="-96" font-family="Times,serif" font-size="10.00" fill="white">startup</text>
+</g>
+<!-- darktable -->
+<g id="node4" class="node">
+<title>darktable</title>
+<polygon fill="transparent" stroke="white" points="262.5,-54 177.5,-54 177.5,-16 262.5,-16 262.5,-54"/>
+<text text-anchor="middle" x="220" y="-38.8" font-family="Times,serif" font-size="14.00" fill="white">darktable</text>
+<text text-anchor="middle" x="220" y="-23.8" font-family="Times,serif" font-size="14.00" fill="white">database</text>
+</g>
+<!-- xmp&#45;&gt;darktable -->
+<g id="edge4" class="edge">
+<title>xmp&#45;&gt;darktable</title>
+<path fill="none" stroke="white" d="M124.45,-132.99C131.58,-127.44 139.27,-121.16 146,-115 164.3,-98.26 183.4,-77.78 197.61,-61.87"/>
+<polygon fill="white" stroke="white" points="200.56,-63.81 204.57,-54.01 195.32,-59.17 200.56,-63.81"/>
+<text text-anchor="middle" x="186.5" y="-107" font-family="Times,serif" font-size="10.00" fill="white">on</text>
+<text text-anchor="middle" x="186.5" y="-96" font-family="Times,serif" font-size="10.00" fill="white">startup</text>
+</g>
+<!-- digiKam&#45;&gt;xmp -->
+<g id="edge3" class="edge">
+<title>digiKam&#45;&gt;xmp</title>
+<path fill="none" stroke="white" d="M80.63,-54.14C84.32,-72.61 90.1,-101.51 94.39,-122.94"/>
+<polygon fill="white" stroke="white" points="90.96,-123.66 96.36,-132.78 97.83,-122.29 90.96,-123.66"/>
+<text text-anchor="middle" x="118.5" y="-107" font-family="Times,serif" font-size="10.00" fill="white">on</text>
+<text text-anchor="middle" x="118.5" y="-96" font-family="Times,serif" font-size="10.00" fill="white">shutdown</text>
+</g>
+<!-- darktable&#45;&gt;xmp -->
+<g id="edge5" class="edge">
+<title>darktable&#45;&gt;xmp</title>
+<path fill="none" stroke="white" d="M221.71,-54.19C222.33,-71.79 220.43,-98.2 206,-115 191.53,-131.85 168.85,-140.84 148.18,-145.61"/>
+<polygon fill="white" stroke="white" points="147.34,-142.21 138.24,-147.64 148.73,-149.07 147.34,-142.21"/>
+<text text-anchor="middle" x="228" y="-107" font-family="Times,serif" font-size="10.00" fill="white">on</text>
+<text text-anchor="middle" x="228" y="-96" font-family="Times,serif" font-size="10.00" fill="white">edit</text>
+</g>
+</g>
+</svg>

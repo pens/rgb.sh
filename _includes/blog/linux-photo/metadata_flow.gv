@@ -1,0 +1,28 @@
+digraph {
+    bgcolor=transparent;
+    color=white;
+    fontcolor=white;
+    edge [color=white, fontcolor=white, fontsize=10];
+    node [color=white, fillcolor=transparent, fontcolor=white, shape=box, style=filled];
+
+    subgraph cluster_nas {
+        label="NAS";
+
+        images -> xmp [label="on\nimport"];
+
+        xmp -> digiKam [label="on\nstartup"];
+        digiKam -> xmp [label="on\nshutdown"];
+
+        digiKam [label="digiKam\ndatabase*"];
+        xmp [label="XMP\nsidecars"];
+    }
+
+    subgraph cluster_pc {
+        label="PC";
+
+        xmp -> darktable [label="on\nstartup"];
+        darktable -> xmp [label="on\nedit"];
+
+        darktable [label="darktable\ndatabase"];
+    }
+}
