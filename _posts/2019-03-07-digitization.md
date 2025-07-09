@@ -1,6 +1,6 @@
 ---
-title: Digitization
-excerpt: This is the story of how I digitized all of my family's photos, home movies and files. I discuss the challenges I faced along the way as well as how I dealt with them.
+title: "Digitization: Part 1"
+excerpt: The story of how I digitized all of my family's photos, home movies and files
 tags: photo project
 ---
 
@@ -8,9 +8,9 @@ Over the 2017 holidays, I decided to collect and digitize all of my family's hom
 
 The first stage of this process was to collect all of the media and whatever I needed to copy it onto a computer.
 
-{% include image.html alt="Digitization setup" src="setup.jpg" cap="The setup I used to digitize my family's media. Thankfully, we had held on to all of the playback equipment needed, other than the Mini8 camcorder." %}
+{% include img alt="Digitization setup" src="setup.jpg" cap="The setup I used to digitize my family's media. Thankfully, we had held on to all of the playback equipment needed, other than the Mini8 camcorder." %}
 
-{% include image.html alt="Types of media" src="media.jpg" cap="Some of the media I digitized. I was never able to read the SmartMedia card (bottom left), even by taking it to a professional camera store. We presume it has already been copied to disc, but I didn't think it would be worth bothering with because it came from a rather bad point-and-shoot anyway." %}
+{% include img alt="Types of media" src="media.jpg" cap="Some of the media I digitized. I was never able to read the SmartMedia card (bottom left), even by taking it to a professional camera store. We presume it has already been copied to disc, but I didn't think it would be worth bothering with because it came from a rather bad point-and-shoot anyway." %}
 
 All of the below scripts were written for [Bash 4](https://www.gnu.org/software/bash/manual/) and ran on a Mac. I relied on [shellharden](https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md) to improve these scripts. I hope these can be useful to others, but it should go without saying to use them at your own risk.
 

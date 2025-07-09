@@ -1,0 +1,6 @@
+<aside class="note">
+    <div>
+        <div>🛈 note</div>
+        {{ include.txt }}
+    </div>
+</aside>

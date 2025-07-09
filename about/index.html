@@ -1,0 +1,26 @@
+---
+title: About Me
+---
+<main class="bg">
+    <header>
+        <h1>{{ page.title }}</h1>
+    </header>
+    <img class="me" src="profile.jpg" alt="Profile picture of Seth Pendergrass">
+    <p>
+        Hello! I'm Seth Pendergrass.
+    </p>
+    <p>
+        Professionally, my main focus is on real-time rendering, and how this technology can be applied to build new realities.
+        I've been able to help build some really cool products to this end during my <a href="{% link career/index.html %}">career</a>.
+    </p>
+    <p>
+        I love making things, whether software or physical.
+        Check out my <a href="{% link projects/index.html %}">projects</a> and <a href="{% link blog/index.html %}">blog</a>.
+    </p>
+    <address>
+        {%- for link in site.data.links %}
+        <a href="{{ link.url }}">{{ link.name }}</a>
+        {%- endfor -%}
+    </address>
+</main>
+<img class="grid" src="grid.png" alt="">

@@ -1,7 +1,7 @@
 - company: ByteDance
   team: Pico Developer Technology
   date: 2023 -
-  desc: "I work on the Pico VR headset."
+  desc: "I optimized 3D Gaussian Splatting to run in real-time on the PICO 4 Ultra. I also built a plugin adding 3DGS support to Unreal Engine, which is available on <a href=https://github.com/Pico-Developer/splat_unreal>GitHub</a>."
 - company: Applied Intuition
   team: Spectral
   date: 2022 - 2023
@@ -13,7 +13,7 @@
 - company: Microsoft
   team: Xbox Backward Compatibility GPU
   date: Summer 2017, 2018 - 2019
-  desc: "I made a number of fixes to ship 360 and OG Xbox titles, as well as added 4K support to a subset."
+  desc: "I made a number of fixes to ship 360 and OG Xbox titles. I also added 4K support to a couple."
 - company: Microsoft
   team: Remote Desktop Graphics
   date: Summer 2016
