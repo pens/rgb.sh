@@ -1,0 +1,23 @@
+digraph {
+    bgcolor=transparent;
+    color=white;
+    fontcolor=white;
+    edge [color=white, fontcolor=white, fontsize=10];
+    node [color=white, fillcolor=transparent, fontcolor=white, shape=box, style=filled];
+
+    iCloud -> PC [dir=both];
+    sd -> PC;
+    shared -> PC [dir=both];
+
+    PC -> NAS [dir=both];
+
+    NAS -> DropBox [label="daily", style=dotted];
+    PC -> hdd;
+
+    iCloud [shape=ellipse];
+    DropBox [shape=ellipse];
+    hdd [label="USB\nhard\ndrives"];
+    NAS [label="NAS*"];
+    sd [label="SD\ncards"];
+    shared [shape=ellipse];
+}
