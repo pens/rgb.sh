@@ -10,8 +10,8 @@ Of all of these tasks, perhaps none has been more of a stressor, nor as long-las
 This project really had two components: the first was to just get my photo catalog into a "good" state; the second was to actually develop a process that would keep the catalog organized over time, *and* make it easy for me to use the photos as I needed (i.e. sharing them).
 This is really an evolution of my efforts getting started with Linux for photography ([Photo Organization](/blog/organization/)), on top of my experiences digitizing family media ([Digitization: Part 1](/blog/digitization/) and [Digitization: Part 2](/blog/digitization-2/)).
 
-I am not much of a fan of the types of online recipes that start by telling an author's entire life story.
-As such, I am going to get right into the learnings from this project that might be useful for others.
+I am not much of a fan of online recipes that start by telling an author's entire life story.
+As such, I am going to get right into the insights from this project that might be useful for others.
 I will blather on about what I went through over the course of this project afterwards.
 
 ## General Suggestions
@@ -26,7 +26,7 @@ I will blather on about what I went through over the course of this project afte
 
    b. *Automatic backups*: While redundancy is important, it doesn't protect your data in the case of a full system loss (e.g. from fire or theft).
       Backups are a necessity to ensure that your library isn't lost in these circumstances.
-      Modern NAS's make it easy to set up automatic backups.
+      A NAS makes it easy to set up automatic backups to whichever cloud provider you prefer.
 
    c. *Multi-device access*: By storing your catalog on an always-available network location, you can access it from multiple devices (e.g. a laptop and a desktop).
 
@@ -40,8 +40,9 @@ I will blather on about what I went through over the course of this project afte
 
 3. Treat your Digital Asset Manager (DAM) as the source of truth for metadata.
 
-   As metadata can be inconsistent across that stored within an image, in metadata sidecars and in photo software databases, it's a good idea to determine what constitutes the "truth".
-   Using the DAM's database seems to be the easiest and most flexible, as they are not constrained to a particular standard.
+   It's a good idea to choose what constitutes the "truth", as metadata can be inconsistent across storage locations.
+   The metadata in an image may not match what is in its sidecar file, nor what is in your photo software database.
+   Using your DAM's database seems to be the easiest and most flexible, as they are not constrained to a particular standard.
    It's still a good idea to keep all metadata in sync with the ground truth source, though, and it's required if you use multiple different applications with their own databases.
 
 4. Store metadata in sidecars.
@@ -155,7 +156,7 @@ DropBox and the USB hard drive copies are for cloud and off-site backups, respec
 
 ### Metadata
 
-{% include svg src="blog/linux-photo/metadata_flow.svg" cap="The flow of metadata through my setup. Edges show when metadata is synchronized between sources. The digiKam database is the source of truth." %}
+{% include svg src="blog/linux-photo/metadata_flow.svg" cap="The flow of metadata through my setup. Edges show when metadata is synchronized between sources.<br>digiKam is my choice of digital asset manager, and darktable is what I use for editing RAW photos. The digiKam database is the source of truth for metadata." %}
 
 The above diagram would differ across different photo programs and their configurations, but is likely to be of a similar structure in any case.
 Ultimately, most programs are going to have their own internal databases to store metadata on top of that located in files and their sidecars.
@@ -172,6 +173,15 @@ I keep a record of the most recent transfer data so as to avoid duplicates.
 This is annoying, but works okay.
 
 At the very least iCloud does correctly read my added metadata, so I can search based on my tags (e.g. for a trip to Croatia).
+
+#### Cloud Services as Your Primary
+
+For most people, the easiest way to manage all of your photos from Linux is actually to just use a cloud service like iCloud or Google Photos.
+I would strongly recommend this if you don't own any cameras beside your phone or tablet, as they are super easy to use, manage redundancy and backups (although you should still have your own!) for you, and making sharing a simple action from your phone.
+
+However, if you have any "dedicated" cameras, I'd avoid this route.
+I'm not aware of any cloud services with good (or really, any) capabilities around editing RAW images, and the costs to store terabytes of images and video in the cloud can add up.
+I find its much harder to sort through photos in these services in more complex ways, which makes it difficult to manage a growing catalog.
 
 ### Backups
 
@@ -391,7 +401,7 @@ I can't tell you how mad I was at myself.
 ### Part 3: Automating Cleanup
 
 Somehow, accidentally erasing all of my manual tagging work was *not* the largest waste of time in this project.
-That prize goes to the yak-shave that was developing a custom tool to automate the management of my catalog.
+That prize goes to the [yak-shave](https://en.wiktionary.org/wiki/yak_shaving) that was developing a custom tool to automate the management of my catalog.
 
 [Catalog 1A](https://github.com/pens/catalog_1a) is the result of many hours of reading about metadata, fiddling with ExifTool and much trial-and-error in trying to programmatically keep my photos organized the way I'd like.
 All said and done I can't say it was worth it, but it was at least a fun project and a great way to learn Rust.
