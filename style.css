@@ -64,6 +64,7 @@ code {
 figcaption {
     display: block;
     font-size: 1rem;
+    font-style: italic;
     margin: .5rem auto 2rem;
     width: 100%;
 }
