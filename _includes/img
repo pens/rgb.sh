@@ -1,4 +1,1 @@
-<figure>
-    <img src="{{ include.src }}" alt="{{ include.alt }}">
-    <figcaption>{{ include.cap }}</figcaption>
-</figure>
+<figure><img src="{{ include.src }}" alt="{{ include.alt }}"><figcaption>{{ include.cap }}</figcaption></figure>

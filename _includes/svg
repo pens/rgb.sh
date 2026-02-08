@@ -1,4 +1,1 @@
-<figure>
-    {% include {{ include.src }} %}
-    <figcaption>{{ include.cap }}</figcaption>
-</figure>
+<figure>{% include {{ include.src }} %}<figcaption>{{ include.cap }}</figcaption></figure>
