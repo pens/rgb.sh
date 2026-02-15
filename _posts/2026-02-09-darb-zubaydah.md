@@ -485,10 +485,13 @@ The view from on top was great.
 Moving onwards, we caught up with our camel team just in time to hit golden hour in a mountain pass.
 Here I took many of my favorite shots from this trip; the lighting and scenery were both phenomenal.
 
+{% include img src="omar.jpg" alt="Omar riding his camel at sunsight" cap="Omar riding sideways on his camel as we closed out the day. The series of shots this image came from were my favorite of the trip." %}
+
 One of our camels decided to walk on the opposite side of a signpost from the group, shearing off his rein.
 This will come up again later.
 
-{% include img src="road_sign.jpg" alt="A road sign" cap="A road sign just ahead of our campsite that night, about a half kilometer straight ahead. The lighting was my favorite of the trip." %}
+{% include img src="road_sign.jpg" alt="A road sign" cap="A road sign just ahead of our campsite that night, about a half kilometer straight ahead. While not the one that sheared our camel's rein, it's the same idea." %}
+
 We set up camp in the early evening not far from the road once through the pass.
 Here we had to watch carefully where we stepped, as the ground was covered in hard, spiky burrs that had no trouble puncturing skin.
 Once camp was ready for the evening, the whole team opted to drive ahead to the city of Mahd adh Dhahab (محافظة مهد الذهب) to restock and enjoy the perks of civilization.
