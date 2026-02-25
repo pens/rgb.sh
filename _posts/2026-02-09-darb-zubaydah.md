@@ -94,7 +94,7 @@ This gave us plenty of time to unpack and set up before the sunlight was gone.
 Once done, we'd enjoy some tea and coffee.
 
 Finally around 6:30 PM we'd do dinner.
-This was our main meal of the day, and was most often [kabsa](https://en.wikipedia.org/wiki/Kabsa): camel or lamb meat, rice and spices all cooked together in a pressure cooker.
+This was our main meal of the day, and was most often [kabsa](https://en.wikipedia.org/wiki/Kabsa): meat (usually chicken but sometimes camel or lamb), rice and spices all cooked together in a pressure cooker.
 The most unique seasoning was the [dried black limes](https://en.wikipedia.org/wiki/Dried_lime), which imparted a delicious earthy, citrus flavor.
 
 Many of our meals were eaten with our hands, which I struggled with.
@@ -110,8 +110,8 @@ Our group consisted of five camels with a lead rider, two vehicles with drivers,
 The first vehicle, an SUV, carried our food and personal belongings, while the second, a truck, hauled the camping setup and water.
 The five camels were generally leashed together in a V formation, with the main rider at the front.
 
-Daily, we would cover around 35 kilometers.
-I generally would tire out after around 25 kilometers though, and ride the remaining portion in the SUV.
+Daily, we would cover around 50 kilometers.
+I generally would tire out after around 35 kilometers though, and ride the remaining portion in the SUV.
 This corresponds with that usual time in the afternoon in which my body can do nothing else but fight off sleep, which has long been the bane of my existence.
 
 {% include img src="camel.jpg" alt="A seated camel" cap="My camel, John." %}
@@ -119,9 +119,9 @@ This corresponds with that usual time in the afternoon in which my body can do n
 Camel saddles take a [myriad of forms](https://www.aramcoworld.com/articles/2018/the-art-of-saddling-a-camel), but none are quite like the typical western saddle fused into the polygonal mesh of a virtual horse.
 As [dromedary camels](https://en.wikipedia.org/wiki/Dromedary) (the one-hump, hot desert kind) have a large hump in the middle of their backs, a different structure for holding the rider is necessitated.
 We rode on shaddads (شداد), a wooden frame which wraps the hump and offers a pole at both the front and back for rider support.
-On top is placed a kharj (خرج), bags for your personal items, and a jada (جعدة), padding (often sheepskin).
+On top is placed a kharj (خرج), bags for your personal items, and a jaid (جاعد), sheepskin padding.
 
-{% include svg src="blog/darb-zubaydah/camel.svg" cap="1. jada (جعدة): sheepskin padding<br>2. kharj (خرج): side bags<br>3. shaddad (شداد): wooden frame<br>4. camel" %}
+{% include svg src="blog/darb-zubaydah/camel.svg" cap="1. jaid (جاعد): sheepskin padding<br>2. kharj (خرج): side bags<br>3. shaddad (شداد): wooden frame<br>4. camel" %}
 
 To get on a camel, you should first make them sit down---although Omar would later show me that he could hop on while his camel stayed standing.
 Our camels were trained to sit when you made a loud "growling" sound from the back of your throat (I am not well enough versed in linguistics to give you the proper terminology here).
@@ -204,7 +204,7 @@ We then took the car to visit the nearby Kutayfah reservoir (بركة الكتي
 
 #### November 14th, 2021
 
-{% include img src="support.jpg" alt="Omar standing by a truck" cap="Omar talking to one of our support drivers, Abu Mushari. In the back of the truck is all of our camping supplies and water." %}
+{% include img src="support.jpg" alt="Omar standing by a truck" cap="Omar talking to one of our support drivers, Abu Mishari. In the back of the truck is all of our camping supplies and water." %}
 
 Continuing on, we headed towards the town of al-Baayith (البعايث).
 Riding into town was a mix of the old and the new; we rode alongside a modern highway through the ruins of many old buildings made of earth.
@@ -460,8 +460,7 @@ Each driver wanted to have us for coffee or lunch; one man offered me a job work
 
 Like all good side quest chains, our successful mission from yesterday would trigger another today.
 The boys who had lost their camels saw us riding through town, and approached us to learn more about our journey.
-Upon hearing that Omar was attempting to visit all of the reservoirs along the Darb Zubaydah, the boys offered up a very useful piece of information: there was actually a nearby reservoir we were not aware of.
-We took down the location for a future visit, but I unfortunately do not recall which of the next couple of reservoirs was the one they pointed us to.
+Upon hearing that Omar was attempting to visit all of the reservoirs along the Darb Zubaydah, the boys offered up a very useful piece of information: there was actually a nearby modern reservoir we were not aware of.
 
 An invite by the town emir (a role equivalent in function to a mayor) was one we could not pass up.
 Omar and I went with one of the support drivers to meet the emir and pose for photos, while the rest of the crew rode onwards.
